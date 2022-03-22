@@ -17,6 +17,7 @@ public class Controleur {
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
+        Fenetre F = new Fenetre();
          Connexion C = new Connexion("test","root","root");
         // TODO code application logic here
     }
