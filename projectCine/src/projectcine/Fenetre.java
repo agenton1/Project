@@ -39,7 +39,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
 
         // mise en page (layout) de la fenetre visible
         setLayout(new BorderLayout());
-        setBounds(0, 0, 400, 400);
+        setBounds(0, 0, 1500, 1200);
         setResizable(true);
         setVisible(true);
 
