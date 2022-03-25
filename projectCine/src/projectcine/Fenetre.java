@@ -135,7 +135,12 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
      * Méthode privée qui initialise la liste des tables
      */
     private void remplirTables() {
-        maconnexion.ajouterTable("coucou");
+        maconnexion.ajouterTable("Employee");
+        maconnexion.ajouterTable("Member");
+        maconnexion.ajouterTable("Movie");
+        maconnexion.ajouterTable("MovieRoom");
+        maconnexion.ajouterTable("Schedule");
+        maconnexion.ajouterTable("Ticket");
 }
     
     public void afficherTables() {
