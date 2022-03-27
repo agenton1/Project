@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package projectcine;
+package Controleur;
 
+import Vue.Fenetre;
+import Modele.Connexion;
 import java.sql.SQLException;
 
 /**
@@ -17,8 +19,13 @@ public class Controleur {
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
-        Fenetre F = new Fenetre();
-        Connexion C = new Connexion("project","root","root");
+               Connexion C = new Connexion("project","root","root");
+               Fenetre F = new Fenetre();
+               
+               
+               
+               
+
         // TODO code application logic here
     }
     

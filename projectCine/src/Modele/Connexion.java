@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectcine;
+package Modele;
 
 /**
  *
@@ -28,18 +28,7 @@ public class Connexion {
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
     /**
-     * ArrayList public pour les tables
-     */
-    public ArrayList<String> tables = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de sélection
-     */
-    public ArrayList<String> requetes = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de MAJ
-     */
-    public ArrayList<String> requetesMaj = new ArrayList<>();
-
+    
     /**
      * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
      *
@@ -65,35 +54,10 @@ public class Connexion {
     }
 
 
-    /**
-     * Méthode qui ajoute la table en parametre dans son ArrayList
-     *
-     * @param table
-     */
-    public void ajouterTable(String table) {
-        tables.add(table);
-    }
 
-    /**
-     * Méthode qui ajoute la requete de selection en parametre dans son
-     * ArrayList
-     *
-     * @param requete
-     */
-    public void ajouterRequete(String requete) {
-        requetes.add(requete);
-    }
+    
 
-    /**
-     * Méthode qui ajoute la requete de MAJ en parametre dans son
-     * ArrayList
-     *
-     * @param requete
-     */
-    public void ajouterRequeteMaj(String requete) {
-        requetesMaj.add(requete);
-    }
-
+    
     /**
      * Méthode qui retourne l'ArrayList des champs de la table en parametre
      *
@@ -178,5 +142,21 @@ public class Connexion {
      */
     public void executeUpdate(String requeteMaj) throws SQLException {
         stmt.executeUpdate(requeteMaj);
+    }
+    
+    public boolean verif(String username , String password) throws SQLException
+    {
+        boolean vf = false;
+        String sql = "Select * from Member where Mail ='"+username+"'and Password ='"+password+"'";
+        rset = stmt.executeQuery(sql);
+        if (rset.next())
+        {
+            vf = true;
+        }
+        return vf;
+    }
+
+    private void dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
