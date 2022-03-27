@@ -20,11 +20,8 @@ public class Controleur {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
                Connexion C = new Connexion("project","root","root");
-               Fenetre F = new Fenetre();
-               
-               
-               
-               
+               Fenetre F = new Fenetre(true);
+                       
 
         // TODO code application logic here
     }

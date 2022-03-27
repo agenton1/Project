@@ -5,6 +5,9 @@
 package Vue;
 
 import Vue.connexionframe;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -90,13 +93,27 @@ public class accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            new inscription().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new connexionframe().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new connexionframe().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

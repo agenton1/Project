@@ -36,10 +36,10 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     /**
      * Constructeur qui initialise tous les objets graphiques de la fenetre
      */
-    public Fenetre() throws SQLException, ClassNotFoundException {
+    public Fenetre(boolean visi) throws SQLException, ClassNotFoundException {
         
         accueil acceuilframe = new accueil();
-        acceuilframe.setVisible(true);
+        acceuilframe.setVisible(visi);
         this.maconnexion = new Connexion("project","root","root");
        }
     
@@ -52,12 +52,11 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         return maconnexion.verif(username, password);
     }
     
-   
-
+    public void insc(int id,String mail, String prenom, String nom, String password, int age, double reduc) throws SQLException
+    {
+        maconnexion.inscr(id,mail,prenom,nom,password,age,reduc);
+    }
     
-   
-  
-
 
     @Override
     @SuppressWarnings("CallToThreadDumpStack")
@@ -91,8 +90,6 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
             // effacer les résultats
             fenetreRes.removeAll();
 
-          
-
             }
 
         }
@@ -101,13 +98,8 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     @SuppressWarnings("CallToThreadDumpStack")
     public void itemStateChanged(ItemEvent evt) {
         // sélection d'une requete et afficher ses résultats
-        
-        if (evt.getSource() == listeDeTables) {
-            // afficher les lignes de la table sélectionnée
-            String nomTable = listeDeTables.getSelectedItem();
-          
-        }
     }
+
 }
 
     
