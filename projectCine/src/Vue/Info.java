@@ -4,6 +4,7 @@
  */
 package Vue;
 
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +16,15 @@ import java.util.logging.Logger;
 public class Info extends javax.swing.JFrame {
     
     private Fenetre mafenetre = new Fenetre(false);
+    private choixFilm NCF = new choixFilm();
     /**
      * Creates new form Info
      */
     public Info() throws SQLException, ClassNotFoundException{
         initComponents();
-        mafenetre.FilmInfo(jLabel9, jLabel10, jLabel13, jLabel14, jLabel15, jLabel12, jLabel11, jLabel1, );
+
+        mafenetre.FilmInfo(jLabel9, jLabel10, jLabel13, jLabel14, jLabel15, jLabel12, jLabel11, jLabel1, NCF.getId());
+        
     }
 
     /**

@@ -89,7 +89,7 @@ public class Connexion {
            
     }
 
-    public void Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    public int Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
     {
         String sql = "Select * from Movie where idMovie = "+id+"";
         rset = stmt.executeQuery(sql);
@@ -105,7 +105,9 @@ public class Connexion {
             Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon NewImage = new ImageIcon(myImg);
             img.setIcon(NewImage);
+            return id;
             }
+        return 0;
            
         }
     public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
@@ -128,17 +130,26 @@ public class Connexion {
             Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon NewImage = new ImageIcon(myImg);
             img.setIcon(NewImage);
-            }
+            }}
            
-          
-    public int getId()
+    /**
+     *
+     * @return
+     */
+
+    /**
+     *
+     * @return
+     * @throws java.sql.SQLException
+     */
+    /*public int getId()throws SQLException
     {
         int Idmovie;
-        String sql = "Select idMovie from Movie ";
+        String sql = "Select idMovie from Movie where ";
         rset = stmt.executeQuery(sql);
         Idmovie = rset.getInt(1);
         return Idmovie;
-    }
+    }*/
     
     
     private void dispose() {

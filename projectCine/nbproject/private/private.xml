@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/arthur/NetBeansProjects/projectCine/src/projectcine/Fenetre.java</file>
-            <file>file:/Users/arthur/NetBeansProjects/projectCine/src/projectcine/Connexion.java</file>
-            <file>file:/Users/arthur/NetBeansProjects/projectCine/src/projectcine/Controleur.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/connexionframe.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/Fenetre.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Modele/Connexion.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/Info.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/choixFilm.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/inscription.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Controleur/Controleur.java</file>
+            <file>file:/Users/arthur/Desktop/Project/projectCine/src/Vue/accueil.java</file>
         </group>
     </open-files>
 </project-private>

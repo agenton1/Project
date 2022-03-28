@@ -27,15 +27,24 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     private final JLabel tab, req, res, lignes;
     private final JLabel nameBDD, requeteLabel;
     private final JTextField requeteTexte, nameBDDTexte;
-    private final JButton exec, local;
+    private JButton bouton;
     private final java.awt.List listeDeTables, listeDeRequetes;
     private final JTextArea fenetreLignes, fenetreRes;
     private final JPanel p0, p1, nord, p2, p3;
+   
     
     
     /**
      * Constructeur qui initialise tous les objets graphiques de la fenetre
      */
+    public Fenetre(JButton b)
+    {
+        bouton=b;
+        bouton.addActionListener(this);
+        
+    }
+    
+    
     public Fenetre(boolean visi) throws SQLException, ClassNotFoundException {
         
         accueil acceuilframe = new accueil();
@@ -57,9 +66,10 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         maconnexion.inscr(id,mail,prenom,nom,password,age,reduc);
     }
     
-    public void Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    public int Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
     {
         maconnexion.Film(titre, time, genre, img,id);
+        return id;
     }
     
     public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
@@ -67,11 +77,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         maconnexion.FilmInfo(titre, real, Seance1, Seance2, Seance3, time, genre, img, id);
        
     }
-   public void getID()
-    {
-        maconnexion.getId();
-    }
-    
+   
     
 
     @Override
@@ -80,35 +86,17 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         Object source = evt.getSource();
 
         // tester cas de la commande evenementielle
-        if (source == local) {
-            ArrayList<String> liste;
-            try {
-                try {
-                    // tentative de connexion si les 4 attributs sont remplis
-                    //maconnexion = new Connexion("jps", "root", "");
-                    maconnexion = new Connexion(nameBDDTexte.getText(), "root", "root");
-
-                    veri(null,null);
-                    
-
-                    // afficher les résultats de la requete selectionnee
-                } catch (ClassNotFoundException cnfe) {
-                    System.out.println("Connexion echouee : probleme de classe");
-                    cnfe.printStackTrace();
-                }
-            } catch (SQLException e) {
-                System.out.println("Connexion echouee : probleme SQL");
-                e.printStackTrace();
-            }
-        } else if (source == exec) {
-            String requeteSelectionnee = requeteTexte.getText(); // récupérer le texte de la requête
-
-            // effacer les résultats
-            fenetreRes.removeAll();
-
-            }
-
+     
+    
+        if(evt.getSource() == bouton)
+        {
+            System.out.println(bouton+"pressed");
+            
         }
+        
+    }
+
+        
 
   @Override
     @SuppressWarnings("CallToThreadDumpStack")
