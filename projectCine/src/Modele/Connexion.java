@@ -8,9 +8,14 @@ package Modele;
  *
  * @author arthur
  */
+import java.awt.Image;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.text.LabelView;
 
 /**
  * 
@@ -81,10 +86,61 @@ public class Connexion {
     {
         String sql = "INSERT INTO Member (idMember, Mail, Surname, Name, Password, Age, Reduction) VALUES ("+id+",'"+mail+"','"+prenom+"','"+nom+"','"+password+"',"+age+","+reduc+")";
         stmt.executeUpdate(sql);
-        
-        
+           
     }
 
+    public void Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        String sql = "Select * from Movie where idMovie = "+id+"";
+        rset = stmt.executeQuery(sql);
+       
+            if(rset.next())
+            {
+            titre.setText(rset.getString(2));
+            time.setText(rset.getString(3));
+            genre.setText(rset.getString(5));
+            byte[] image = rset.getBytes("Image");
+            ImageIcon ima = new ImageIcon(image);
+            Image im = ima.getImage();
+            Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon NewImage = new ImageIcon(myImg);
+            img.setIcon(NewImage);
+            }
+           
+        }
+    public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        String sql = "Select * from Movie where idMovie = "+id+"";
+        rset = stmt.executeQuery(sql);
+       
+            if(rset.next())
+            {
+            real.setText(rset.getString(4));
+            Seance1.setText(rset.getString(6));
+            Seance2.setText(rset.getString(8));
+            Seance3.setText(rset.getString(9));
+            titre.setText(rset.getString(2));
+            time.setText(rset.getString(3));
+            genre.setText(rset.getString(5));
+            byte[] image = rset.getBytes("Image");
+            ImageIcon ima = new ImageIcon(image);
+            Image im = ima.getImage();
+            Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon NewImage = new ImageIcon(myImg);
+            img.setIcon(NewImage);
+            }
+           
+          
+    public int getId()
+    {
+        int Idmovie;
+        String sql = "Select idMovie from Movie ";
+        rset = stmt.executeQuery(sql);
+        Idmovie = rset.getInt(1);
+        return Idmovie;
+    }
+    
+    
     private void dispose() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

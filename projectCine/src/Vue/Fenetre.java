@@ -41,7 +41,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         accueil acceuilframe = new accueil();
         acceuilframe.setVisible(visi);
         this.maconnexion = new Connexion("project","root","root");
-       }
+    }
     
    
     /**
@@ -56,6 +56,22 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     {
         maconnexion.inscr(id,mail,prenom,nom,password,age,reduc);
     }
+    
+    public void Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        maconnexion.Film(titre, time, genre, img,id);
+    }
+    
+    public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        maconnexion.FilmInfo(titre, real, Seance1, Seance2, Seance3, time, genre, img, id);
+       
+    }
+   public void getID()
+    {
+        maconnexion.getId();
+    }
+    
     
 
     @Override

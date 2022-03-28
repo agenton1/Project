@@ -164,6 +164,10 @@ public class connexionframe extends javax.swing.JFrame {
                
                JOptionPane.showMessageDialog(this, "welcome");
                
+               new choixFilm().setVisible(true);
+               this.dispose();
+               
+               
            }
            else if(mafenetre.veri(username, Password)==false)
            {
@@ -171,6 +175,8 @@ public class connexionframe extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(this, "wrong");
            }
        } catch (SQLException ex) {
+            Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
         }
        
