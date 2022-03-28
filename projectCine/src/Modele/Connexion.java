@@ -88,6 +88,20 @@ public class Connexion {
         stmt.executeUpdate(sql);
            
     }
+    
+    public double Prixmembre(String username) throws SQLException
+    {
+        double pm = 0;
+        String sql = "Select Reduction from Member where  Mail= '"+username+"'";
+        rset = stmt.executeQuery(sql);
+        
+        if(rset.next())
+        {
+            pm = rset.getDouble(7);
+        }
+        return pm; 
+    }
+    
 
     public int Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
     {
@@ -131,25 +145,23 @@ public class Connexion {
             ImageIcon NewImage = new ImageIcon(myImg);
             img.setIcon(NewImage);
             }}
-           
-    /**
-     *
-     * @return
-     */
-
-    /**
-     *
-     * @return
-     * @throws java.sql.SQLException
-     */
-    /*public int getId()throws SQLException
+   
+    public double res(JLabel place1, JLabel place2, JLabel place3, JLabel prix, int id) throws SQLException
     {
-        int Idmovie;
-        String sql = "Select idMovie from Movie where ";
+        double p = 0;
+        String sql = "Select * from Movie where idMovie = "+id+"";
         rset = stmt.executeQuery(sql);
-        Idmovie = rset.getInt(1);
-        return Idmovie;
-    }*/
+       
+            if(rset.next())
+            {
+                place1.setText(rset.getString(11));
+                place2.setText(rset.getString(12));
+                place3.setText(rset.getString(13));
+                prix.setText(rset.getString(10));
+                p=rset.getDouble(10);
+            }
+        return p;
+    }
     
     
     private void dispose() {

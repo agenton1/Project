@@ -37,12 +37,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     /**
      * Constructeur qui initialise tous les objets graphiques de la fenetre
      */
-    public Fenetre(JButton b)
-    {
-        bouton=b;
-        bouton.addActionListener(this);
-        
-    }
+   
     
     
     public Fenetre(boolean visi) throws SQLException, ClassNotFoundException {
@@ -78,30 +73,27 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
        
     }
    
-    
-
-    @Override
-    @SuppressWarnings("CallToThreadDumpStack")
-    public void actionPerformed(ActionEvent evt) {
-        Object source = evt.getSource();
-
-        // tester cas de la commande evenementielle
-     
-    
-        if(evt.getSource() == bouton)
-        {
-            System.out.println(bouton+"pressed");
-            
-        }
+    public double res(JLabel place1, JLabel place2, JLabel place3, JLabel prix, int id) throws SQLException
+    {
         
+        return maconnexion.res(place1, place2, place3, prix, id);
     }
-
-        
-
+    
+    public double prixm(String username) throws SQLException
+    {
+        return maconnexion.Prixmembre(username);
+    }
+    
+    
   @Override
     @SuppressWarnings("CallToThreadDumpStack")
     public void itemStateChanged(ItemEvent evt) {
         // sélection d'une requete et afficher ses résultats
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -17,8 +17,8 @@ import javax.swing.*;
  */
 public class choixFilm extends javax.swing.JFrame  {
     
-    int a,b,c,d;
-    boolean e,f,g,h;
+    static int a,b,c,d;
+    String u;
    
     /**
      * Creates new form filmaffiche
@@ -26,48 +26,18 @@ public class choixFilm extends javax.swing.JFrame  {
     private Fenetre mafenetre = new Fenetre(false);
    
     
-    public choixFilm()throws SQLException, ClassNotFoundException {
+    public choixFilm(String username)throws SQLException, ClassNotFoundException {
        
+        u=username;
         initComponents();
        
         a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1246);
         b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,1562);
         c=mafenetre.Film(jLabel11, jLabel12, jLabel10, jLabel9,1653);
         d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,8762);
-        
-        
-        
+          
     }
-    
       
-    
-    public int getId()
-    {
-        if(e==true)
-        {
-            System.out.println("pressed");
-            return a;
-        }
-        
-        else if(f==true)
-        {
-            return b;
-        }
-        
-        else if(g==true)
-        {
-            return c;
-        }
-        
-        else if(h==true)
-        {
-            return d;
-        }
-        else return 0;
-    }
-       
-    
-     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,9 +300,9 @@ public class choixFilm extends javax.swing.JFrame  {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            f=true;
-            new Info().setVisible(true);
-            getId();
+            
+            new Info(c,u).setVisible(true);
+           
             //System.out.println(getId());
             
         } catch (SQLException ex) {
@@ -350,7 +320,19 @@ public class choixFilm extends javax.swing.JFrame  {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            
+            new Info(b,u).setVisible(true);
+           
+            //System.out.println(getId());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -360,16 +342,28 @@ public class choixFilm extends javax.swing.JFrame  {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            
+            new Info(d,u).setVisible(true);
+           
+            //System.out.println(getId());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
             
             // TODO add your handling code here:
-            e=true;
-            new Info().setVisible(true);
-            System.out.println(getId());
+          
+            new Info(a,u).setVisible(true);
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
@@ -417,7 +411,7 @@ public class choixFilm extends javax.swing.JFrame  {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new choixFilm().setVisible(true);
+                    new choixFilm(u).setVisible(true);
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
