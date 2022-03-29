@@ -56,9 +56,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         return maconnexion.verif(username, password);
     }
     
-    public void insc(int id,String mail, String prenom, String nom, String password, int age, double reduc) throws SQLException
+    public void insc(int id,String mail, String prenom, String nom, String password, int age, double reduc, String CardNo, int CVC, int balance) throws SQLException
     {
-        maconnexion.inscr(id,mail,prenom,nom,password,age,reduc);
+        maconnexion.inscr(id,mail,prenom,nom,password,age,reduc,CardNo,CVC,balance);
     }
     
     public int Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
@@ -84,6 +84,36 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         return maconnexion.Prixmembre(username);
     }
     
+     public void Recap(JLabel titre,JLabel real, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+     {
+         maconnexion.Recap(titre, real, time, genre, img, id);
+     }
+     
+     public boolean vcard(String username, String CardNo, int CVC) throws SQLException
+     {
+         return maconnexion.vcard(username, CardNo, CVC);
+     }
+     
+      public double balance(String username) throws SQLException
+      {
+          return maconnexion.balance(username);
+        
+      }
+      
+      public void Ticket(int id, int idme, int idmo, double price, String seance) throws SQLException
+      {
+          maconnexion.Ticket(id, idme, idmo, price, seance);
+      }
+      
+      public int recupIdMe(String username) throws SQLException
+      {
+          return maconnexion.recupIdMe(username);
+      }
+      
+      public void affTicket(JLabel idme, JLabel idmo, JLabel price, JLabel seance, int i) throws SQLException
+      {
+          maconnexion.affTicket(idme, idmo, price, seance, i);
+      }         
     
   @Override
     @SuppressWarnings("CallToThreadDumpStack")

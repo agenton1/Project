@@ -5,6 +5,8 @@
 package Vue;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 
 /**
@@ -14,22 +16,25 @@ import javax.swing.JCheckBox;
 public class Reserver extends javax.swing.JFrame {
     
      private Fenetre mafenetre = new Fenetre(false);
-    
+    int i;
+    double p,pm;
+    String u;
+   
     /**
      * Creates new form Reserver
      */
     public Reserver(String s1, String s2, String s3,int id, String username)throws SQLException, ClassNotFoundException {
-        double p;
+        
+        i=id;
+        u=username;
         initComponents();
         jCheckBox1.setText(s1);
         jCheckBox2.setText(s2);
         jCheckBox3.setText(s3);
         p=mafenetre.res(jLabel4, jLabel5, jLabel6, jLabel8, id);
-        jLabel10.setText(""+(p*mafenetre.prixm(username))/100+"");
-        System.out.println(mafenetre.prixm(username));
-        System.out.println(username);
-        
-        
+        pm=(p*mafenetre.prixm(username))/100;
+        jLabel10.setText(""+pm+" €");
+              
     }
 
     /**
@@ -55,6 +60,7 @@ public class Reserver extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +102,13 @@ public class Reserver extends javax.swing.JFrame {
 
         jLabel10.setText("jLabel8");
 
+        jButton2.setText("Retour");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,18 +135,18 @@ public class Reserver extends javax.swing.JFrame {
                                 .addComponent(jLabel8)))
                         .addGap(104, 104, 104)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +168,9 @@ public class Reserver extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -177,13 +192,51 @@ public class Reserver extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String s = null;
         
+        if(jCheckBox1.isSelected())
+        {
+            s=jCheckBox1.getText();
+        }
+       
+        else if(jCheckBox2.isSelected())
+        {
+            s=jCheckBox2.getText();
+        }
+        
+        else if(jCheckBox3.isSelected())
+        {
+            s=jCheckBox3.getText();
+        }
+        
+         try {
+             new Recapitulatif(i,s,pm,u).setVisible(true);
+             
+         } catch (SQLException ex) {
+             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         try {
+             // TODO add your handling code here:
+             new choixFilm(u).setVisible(true);
+         } catch (SQLException ex) {
+             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class connexionframe extends javax.swing.JFrame {
 
+    static String u;
     /**
      * Creates new form connexionframe
      */
@@ -161,10 +162,10 @@ public class connexionframe extends javax.swing.JFrame {
        else try {
            if(mafenetre.veri(username, Password)==true)
            {
-               
+               u=username;
                JOptionPane.showMessageDialog(this, "welcome");
                
-               new choixFilm(username).setVisible(true);
+               new choixFilm(u).setVisible(true);
                this.dispose();
                
                

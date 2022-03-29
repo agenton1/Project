@@ -82,11 +82,31 @@ public class Connexion {
         
     }
     
-    public void inscr(int id, String mail, String prenom, String nom, String password, int age, double reduc) throws SQLException
+    public void inscr(int id, String mail, String prenom, String nom, String password, int age, double reduc, String CardNo, int CVC, int balance) throws SQLException
     {
-        String sql = "INSERT INTO Member (idMember, Mail, Surname, Name, Password, Age, Reduction) VALUES ("+id+",'"+mail+"','"+prenom+"','"+nom+"','"+password+"',"+age+","+reduc+")";
+        String sql = "INSERT INTO Member (idMember, Mail, Surname, Name, Password, Age, Reduction, CardNo, CVC, balance) VALUES ("+id+",'"+mail+"','"+prenom+"','"+nom+"','"+password+"',"+age+","+reduc+",'"+CardNo+"',"+CVC+","+balance+")";
         stmt.executeUpdate(sql);
            
+    }
+    
+    public void Ticket(int id, int idme, int idmo, double price, String seance) throws SQLException
+    {
+        String sql = "INSERT INTO Ticket (idTicket, idMember, idMovie, Price, seance) VALUES ("+id+","+idme+","+idmo+","+price+",'"+seance+"')";
+        stmt.executeUpdate(sql);    
+    }
+    
+    public void affTicket(JLabel idme, JLabel idmo, JLabel price, JLabel seance, int i) throws SQLException
+    {
+        String sql = "Select * from Ticket where idTicket= "+i+"";
+        rset = stmt.executeQuery(sql);
+        
+        if(rset.next())
+        {
+           idme.setText(rset.getString(2));
+           idmo.setText(rset.getString(3));
+           price.setText(rset.getString(4)+" €");
+           seance.setText(rset.getString(5));
+        }
     }
     
     public double Prixmembre(String username) throws SQLException
@@ -97,9 +117,34 @@ public class Connexion {
         
         if(rset.next())
         {
-            pm = rset.getDouble(7);
+            pm = rset.getDouble(1);
         }
         return pm; 
+    }
+    
+     public double balance(String username) throws SQLException
+    {
+        double pm = 0;
+        String sql = "Select balance from Member where  Mail= '"+username+"'";
+        rset = stmt.executeQuery(sql);
+        
+        if(rset.next())
+        {
+            pm = rset.getDouble(1);
+        }
+        return pm; 
+    }
+     public boolean vcard(String username, String CardNo, int CVC) throws SQLException
+    {
+        boolean b = false;
+        String sql = "Select * from Member where  Mail= '"+username+"'and CardNo = '"+CardNo+"'and CVC = "+CVC+"";
+        rset = stmt.executeQuery(sql);
+        
+        if(rset.next())
+        {
+           b=true;
+        }
+        return b;
     }
     
 
@@ -123,7 +168,20 @@ public class Connexion {
             }
         return 0;
            
+    }
+    
+    public int recupIdMe(String username) throws SQLException
+    {
+        int id = 0;
+        String sql = "Select idMember from Member where Mail = '"+username+"'";
+        rset = stmt.executeQuery(sql);
+        if(rset.next())
+        {
+            id=rset.getInt(1);
         }
+        return id;
+    }
+    
     public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
     {
         String sql = "Select * from Movie where idMovie = "+id+"";
@@ -157,12 +215,32 @@ public class Connexion {
                 place1.setText(rset.getString(11));
                 place2.setText(rset.getString(12));
                 place3.setText(rset.getString(13));
-                prix.setText(rset.getString(10));
+                prix.setText(rset.getString(10)+" €");
                 p=rset.getDouble(10);
             }
         return p;
     }
     
+    public void Recap(JLabel titre,JLabel real, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        String sql = "Select * from Movie where idMovie = "+id+"";
+        rset = stmt.executeQuery(sql);
+       
+            if(rset.next())
+            {
+            real.setText(rset.getString(4));
+            titre.setText(rset.getString(2));
+            time.setText(rset.getString(3));
+            genre.setText(rset.getString(5));
+            byte[] image = rset.getBytes("Image");
+            ImageIcon ima = new ImageIcon(image);
+            Image im = ima.getImage();
+            Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon NewImage = new ImageIcon(myImg);
+            img.setIcon(NewImage);
+            }
+    }
+   
     
     private void dispose() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

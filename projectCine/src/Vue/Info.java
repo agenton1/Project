@@ -27,6 +27,7 @@ public class Info extends javax.swing.JFrame {
         initComponents();
 
         mafenetre.FilmInfo(jLabel9, jLabel10, jLabel13, jLabel14, jLabel15, jLabel12, jLabel11, jLabel1, id);
+       
         
     }
 
