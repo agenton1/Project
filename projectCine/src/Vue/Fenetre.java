@@ -113,7 +113,17 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
       public void affTicket(JLabel idme, JLabel idmo, JLabel price, JLabel seance, int i) throws SQLException
       {
           maconnexion.affTicket(idme, idmo, price, seance, i);
-      }         
+      }   
+
+      public void updatePrice(double prix, String username) throws SQLException
+      {
+          maconnexion.updatePrice(prix,username);
+      }
+      
+      public void updateplaces(int place,int id) throws SQLException
+      {
+        maconnexion.updateplaces(place,id);
+      }
     
   @Override
     @SuppressWarnings("CallToThreadDumpStack")

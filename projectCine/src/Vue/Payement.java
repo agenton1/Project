@@ -26,7 +26,14 @@ public class Payement extends javax.swing.JFrame {
     public Payement(String username, double p, String seance, int id)throws SQLException, ClassNotFoundException {
         initComponents();
         jLabel2.setText(""+p+" €");
+        if(!username.equals("guest"))
+        {
         jLabel6.setText(""+mafenetre.balance(username)+" €");
+        }
+        else
+        {
+            jLabel6.setText("vous n'avez pas de compte chez nous");
+        }
         u=username;
         prix=p;
         s=seance;
@@ -69,7 +76,7 @@ public class Payement extends javax.swing.JFrame {
 
         jLabel4.setText("CVC");
 
-        jLabel5.setText("Balance");
+        jLabel5.setText("Balance :");
 
         jLabel6.setText("jLabel6");
 
@@ -88,15 +95,13 @@ public class Payement extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(248, 248, 248)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))
+                        .addGap(97, 97, 97)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(77, 77, 77)
-                                .addComponent(jLabel2))))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -146,9 +151,25 @@ public class Payement extends javax.swing.JFrame {
         String CardNo = jTextField1.getText();
         int CVC = Integer.parseInt(jTextField2.getText());
         int id = 0;
+        int g = 0;
         id = (int) (1 + (Math.random() * (999 - 1)));
-              
-       if(CardNo.equals("") && CVC == 0){ 
+        g = (int) (1 + (Math.random() * (999 - 1)));
+         
+        if(u.equals("guest"))
+        {
+            JOptionPane.showMessageDialog(this, "Payement successfull");
+            try {
+                mafenetre.Ticket(id, g, i, prix, s);
+                new Ticket(id).setVisible(true);
+                this.dispose();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(CardNo.equals("") && CVC == 0){ 
           
           JOptionPane.showMessageDialog(this, "enter CardNo and CVC");
           
@@ -171,6 +192,7 @@ public class Payement extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(this, "Payement successfull");
                
                mafenetre.Ticket(id, mafenetre.recupIdMe(u), i, prix, s);
+               mafenetre.updatePrice(prix,u);
                new Ticket(id).setVisible(true);
                this.dispose();
                

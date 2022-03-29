@@ -31,10 +31,10 @@ public class choixFilm extends javax.swing.JFrame  {
         u=username;
         initComponents();
        
-        a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1246);
-        b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,1562);
-        c=mafenetre.Film(jLabel11, jLabel12, jLabel10, jLabel9,1653);
-        d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,8762);
+        a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1);
+        b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,2);
+        c=mafenetre.Film(jLabel11, jLabel12, jLabel10, jLabel9,3);
+        d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,4);
      
           
     }

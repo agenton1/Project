@@ -240,7 +240,34 @@ public class Connexion {
             img.setIcon(NewImage);
             }
     }
-   
+    
+    public void updatePrice(double prix,String username) throws SQLException
+    {
+        String sql = "UPDATE Member SET balance = balance-"+prix+"where Mail = '"+username+"'";
+        stmt.executeUpdate(sql);
+          
+    }
+    
+    public void updateplaces(int place,int id) throws SQLException
+    {
+    if(place==1)
+        {
+        String sql2 = "UPDATE Movie SET PlacesRestantes = PlacesRestantes-1 where idMovie ="+id+"";
+        stmt.executeUpdate(sql2);
+        }
+        
+        if(place==2)
+        {
+        String sql2 = "UPDATE Movie SET PlacesRestantes2 = PlacesRestantes2-1 where idMovie ="+id+"";
+        stmt.executeUpdate(sql2);
+        }
+        
+        if(place==3)
+        {
+        String sql2 = "UPDATE Movie SET PlacesRestantes3 = PlacesRestantes3-1 where idMovie ="+id+"";
+        stmt.executeUpdate(sql2);
+        }
+    }
     
     private void dispose() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

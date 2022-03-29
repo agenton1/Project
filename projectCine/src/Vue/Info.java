@@ -206,6 +206,9 @@ public class Info extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        if(!u.equals("guest"))
+        {
         try {
             // TODO add your handling code here:
             new Reserver(jLabel13.getText(), jLabel14.getText(), jLabel15.getText(),id ,u).setVisible(true);
@@ -214,7 +217,18 @@ public class Info extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();}
+        else{
+            try {
+            // TODO add your handling code here:
+            new ReserverG(jLabel13.getText(), jLabel14.getText(), jLabel15.getText(),id ,u).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
    
