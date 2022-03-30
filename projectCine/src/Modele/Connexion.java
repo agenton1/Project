@@ -248,23 +248,23 @@ public class Connexion {
           
     }
     
-    public void updateplaces(int place,int id) throws SQLException
+    public void updateplaces(int place,int id, int nb) throws SQLException
     {
     if(place==1)
         {
-        String sql2 = "UPDATE Movie SET PlacesRestantes = PlacesRestantes-1 where idMovie ="+id+"";
+        String sql2 = "UPDATE Movie SET PlacesRestantes = PlacesRestantes-1-"+nb+" where idMovie ="+id+"";
         stmt.executeUpdate(sql2);
         }
         
         if(place==2)
         {
-        String sql2 = "UPDATE Movie SET PlacesRestantes2 = PlacesRestantes2-1 where idMovie ="+id+"";
+        String sql2 = "UPDATE Movie SET PlacesRestantes2 = PlacesRestantes2-1-"+nb+" where idMovie ="+id+"";
         stmt.executeUpdate(sql2);
         }
         
         if(place==3)
         {
-        String sql2 = "UPDATE Movie SET PlacesRestantes3 = PlacesRestantes3-1 where idMovie ="+id+"";
+        String sql2 = "UPDATE Movie SET PlacesRestantes3 = PlacesRestantes3-1-"+nb+" where idMovie ="+id+"";
         stmt.executeUpdate(sql2);
         }
     }

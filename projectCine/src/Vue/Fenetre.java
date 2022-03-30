@@ -24,15 +24,6 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
 
     Connexion maconnexion ;
     
-    private final JLabel tab, req, res, lignes;
-    private final JLabel nameBDD, requeteLabel;
-    private final JTextField requeteTexte, nameBDDTexte;
-    private JButton bouton;
-    private final java.awt.List listeDeTables, listeDeRequetes;
-    private final JTextArea fenetreLignes, fenetreRes;
-    private final JPanel p0, p1, nord, p2, p3;
-   
-    
     
     /**
      * Constructeur qui initialise tous les objets graphiques de la fenetre
@@ -120,9 +111,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
           maconnexion.updatePrice(prix,username);
       }
       
-      public void updateplaces(int place,int id) throws SQLException
+      public void updateplaces(int place,int id,int nb) throws SQLException
       {
-        maconnexion.updateplaces(place,id);
+        maconnexion.updateplaces(place,id,nb);
       }
     
   @Override
