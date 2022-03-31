@@ -8,6 +8,7 @@ import Vue.accueil;
 import Modele.Connexion;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.*;
 import javax.swing.*;
 import java.sql.*;
@@ -47,9 +48,19 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         return maconnexion.verif(username, password);
     }
     
+     public boolean veriE(String password,String username) throws SQLException
+    {
+        return maconnexion.verifE(password, username);
+    }
+    
     public void insc(int id,String mail, String prenom, String nom, String password, int age, double reduc, String CardNo, int CVC, int balance) throws SQLException
     {
         maconnexion.inscr(id,mail,prenom,nom,password,age,reduc,CardNo,CVC,balance);
+    }
+    
+    public void inscE(int id,String mail, String password) throws SQLException
+    {
+        maconnexion.inscrE(id,mail,password);
     }
     
     public int Film(JLabel titre, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
@@ -91,16 +102,12 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         
       }
       
-      public void Ticket(int id, int idme, int idmo, double price, String seance) throws SQLException
+      public void Ticket(int id, String u, int idmo, double price, String seance) throws SQLException
       {
-          maconnexion.Ticket(id, idme, idmo, price, seance);
+          maconnexion.Ticket(id, u, idmo, price, seance);
       }
       
-      public int recupIdMe(String username) throws SQLException
-      {
-          return maconnexion.recupIdMe(username);
-      }
-      
+    
       public void affTicket(JLabel idme, JLabel idmo, JLabel price, JLabel seance, int i) throws SQLException
       {
           maconnexion.affTicket(idme, idmo, price, seance, i);
@@ -114,6 +121,16 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
       public void updateplaces(int place,int id,int nb) throws SQLException
       {
         maconnexion.updateplaces(place,id,nb);
+      }
+      
+      public void ajoutbal(double i,String u) throws SQLException
+      {
+        maconnexion.ajoutbal(i, u);
+      }
+      
+      public void MAJFilm(String titre, int time, String real, String genre, String seance1, String img,String seance2, String seance3, double prix, int PlacesR1, int PlacesR2, int PlacesR3, int id) throws SQLException, FileNotFoundException
+      {
+          maconnexion.MAJFilm(img, time, real, genre, seance1, titre, seance2, seance3, prix, PlacesR1, PlacesR2, PlacesR3, id);
       }
     
   @Override

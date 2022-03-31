@@ -210,7 +210,7 @@ public class ReserverG extends javax.swing.JFrame {
             s=jButton3.getText();
             try {
                 mafenetre.updateplaces(3,i,jComboBox1.getSelectedIndex());
-                p=p*jComboBox1.getSelectedIndex()+10;
+                p=p*(jComboBox1.getSelectedIndex()+1);
                 new Recapitulatif(i,s,p,u).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);

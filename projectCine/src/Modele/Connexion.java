@@ -9,6 +9,9 @@ package Modele;
  * @author arthur
  */
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -82,6 +85,19 @@ public class Connexion {
         
     }
     
+     public boolean verifE(String password, String username) throws SQLException
+    {
+        boolean vf = false;
+        String sql = "Select * from Employee where Password ='"+password+"' and Name ='"+username+"'";
+        rset = stmt.executeQuery(sql);
+        if (rset.next())
+        {
+            vf = true;
+        }
+        return vf;
+        
+    }
+    
     public void inscr(int id, String mail, String prenom, String nom, String password, int age, double reduc, String CardNo, int CVC, int balance) throws SQLException
     {
         String sql = "INSERT INTO Member (idMember, Mail, Surname, Name, Password, Age, Reduction, CardNo, CVC, balance) VALUES ("+id+",'"+mail+"','"+prenom+"','"+nom+"','"+password+"',"+age+","+reduc+",'"+CardNo+"',"+CVC+","+balance+")";
@@ -89,9 +105,16 @@ public class Connexion {
            
     }
     
-    public void Ticket(int id, int idme, int idmo, double price, String seance) throws SQLException
+     public void inscrE(int id, String password, String mail) throws SQLException
     {
-        String sql = "INSERT INTO Ticket (idTicket, idMember, idMovie, Price, seance) VALUES ("+id+","+idme+","+idmo+","+price+",'"+seance+"')";
+        String sql = "INSERT INTO Employee (idEmployee, Password, Name) VALUES ("+id+",'"+password+"','"+mail+"')";
+        stmt.executeUpdate(sql);
+           
+    }
+    
+    public void Ticket(int id, String u, int idmo, double price, String seance) throws SQLException
+    {
+        String sql = "INSERT INTO Ticket (idTicket, idMember, idMovie, Price, seance) VALUES ("+id+", (Select idMember from Member where Mail = '"+u+"'),"+idmo+","+price+",'"+seance+"')";
         stmt.executeUpdate(sql);    
     }
     
@@ -170,19 +193,30 @@ public class Connexion {
            
     }
     
-    public int recupIdMe(String username) throws SQLException
-    {
-        int id = 0;
-        String sql = "Select idMember from Member where Mail = '"+username+"'";
-        rset = stmt.executeQuery(sql);
-        if(rset.next())
-        {
-            id=rset.getInt(1);
-        }
-        return id;
-    }
     
     public void FilmInfo(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
+    {
+        String sql = "Select * from Movie where idMovie = "+id+"";
+        rset = stmt.executeQuery(sql);
+       
+            if(rset.next())
+            {
+            real.setText(rset.getString(4));
+            Seance1.setText(rset.getString(6));
+            Seance2.setText(rset.getString(8));
+            Seance3.setText(rset.getString(9));
+            titre.setText(rset.getString(2));
+            time.setText(rset.getString(3));
+            genre.setText(rset.getString(5));
+            byte[] image = rset.getBytes("Image");
+            ImageIcon ima = new ImageIcon(image);
+            Image im = ima.getImage();
+            Image myImg = im.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon NewImage = new ImageIcon(myImg);
+            img.setIcon(NewImage);
+            }}
+    
+    public void FilmMAJ(JLabel titre,JLabel real, JLabel Seance1, JLabel Seance2, JLabel Seance3, JLabel time, JLabel genre, JLabel img, int id) throws SQLException
     {
         String sql = "Select * from Movie where idMovie = "+id+"";
         rset = stmt.executeQuery(sql);
@@ -243,9 +277,19 @@ public class Connexion {
     
     public void updatePrice(double prix,String username) throws SQLException
     {
-        String sql = "UPDATE Member SET balance = balance-"+prix+"where Mail = '"+username+"'";
+        String sql = "UPDATE Member SET balance = balance-"+prix+" where Mail = '"+username+"'";
         stmt.executeUpdate(sql);
           
+    }
+    
+     public void MAJFilm(String titre, int time, String real, String genre, String seance1, String img,String seance2, String seance3, double prix, int PlacesR1, int PlacesR2, int PlacesR3, int id) throws SQLException, FileNotFoundException
+    {
+        String sql = "UPDATE Movie SET  Image =?, Time = "+time+", Authors = '"+real+"', Genre = '"+genre+"', Seance1 = '"+seance1+"',Title ='"+titre+"' ,Seance2 = '"+seance2+"',Seance3 = '"+seance3+"', Prix = "+prix+", PlacesRestantes = "+PlacesR1+", PlacesRestantes2 = "+PlacesR2+", PlacesRestantes3 = "+PlacesR3+" where idMovie = "+id+";";
+        PreparedStatement stmt2 = conn.prepareStatement(sql);
+        File theFile = new File("/Users/arthur/Downloads/"+img+"");
+        FileInputStream input = new FileInputStream(theFile);
+        stmt2.setBinaryStream(1, input);
+        stmt2.executeUpdate();     
     }
     
     public void updateplaces(int place,int id, int nb) throws SQLException
@@ -267,6 +311,12 @@ public class Connexion {
         String sql2 = "UPDATE Movie SET PlacesRestantes3 = PlacesRestantes3-1-"+nb+" where idMovie ="+id+"";
         stmt.executeUpdate(sql2);
         }
+    }
+    
+    public void ajoutbal(double i,String u) throws SQLException
+    {
+        String sql = "UPDATE Member SET balance = balance + "+i+" where Mail = '"+u+"'";
+        stmt.executeUpdate(sql);
     }
     
     private void dispose() {

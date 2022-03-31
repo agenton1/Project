@@ -28,16 +28,19 @@ public class Payement extends javax.swing.JFrame {
         jLabel2.setText(""+p+" €");
         if(!username.equals("guest"))
         {
-        jLabel6.setText(""+mafenetre.balance(username)+" €");
+            jLabel6.setText(""+mafenetre.balance(username)+" €");
         }
-        else
+        
+        else if (username.equals("guest"))
         {
             jLabel6.setText("vous n'avez pas de compte chez nous");
         }
+      
         u=username;
         prix=p;
         s=seance;
         i=id;
+        
         
     }
 
@@ -154,57 +157,71 @@ public class Payement extends javax.swing.JFrame {
         int g = 0;
         id = (int) (1 + (Math.random() * (999 - 1)));
         g = (int) (1 + (Math.random() * (999 - 1)));
-         
-        if(u.equals("guest"))
-        {
-            JOptionPane.showMessageDialog(this, "Payement successfull");
-            try {
-                mafenetre.Ticket(id, g, i, prix, s);
-                new Ticket(id).setVisible(true);
-                this.dispose();
+        
+        try {
+            if((mafenetre.balance(u)==0) || ((mafenetre.balance(u)-prix)<0))
+            {
                 
+                JOptionPane.showMessageDialog(this, "balance trop faible. Veuillez renflouer la balance");
+                new ajoutbal(u, prix, s, i).setVisible(true);
+                this.dispose();
+            }
+            
+            else if(u.equals("guest"))
+            {
+                JOptionPane.showMessageDialog(this, "Payement successfull");
+                try {
+                    mafenetre.Ticket(id, String.valueOf(g), i, prix, s);
+                    new Ticket(id).setVisible(true);
+                    this.dispose();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if(CardNo.equals("") && CVC == 0){
+                
+                JOptionPane.showMessageDialog(this, "enter CardNo and CVC");
+                
+            }
+            
+            else if (!(CardNo.equals("")) && CVC == 0 ){
+                
+                JOptionPane.showMessageDialog(this, "enter CVC");
+            }
+            
+            else if ((CardNo.equals("")) && !(CVC == 0 ) ){
+                
+                JOptionPane.showMessageDialog(this, "enter CardNo");
+            }
+            
+            else try {
+                if(mafenetre.vcard(u, CardNo, CVC)==true)
+                {
+                    
+                    JOptionPane.showMessageDialog(this, "Payement successfull");
+                    
+                    mafenetre.Ticket(id, u, i, prix, s);
+                    mafenetre.updatePrice(prix,u);
+                    new Ticket(id).setVisible(true);
+                    this.dispose();
+                    
+                    
+                }
+                else if(mafenetre.vcard(u, CardNo, CVC)==false)
+                {
+                    
+                    JOptionPane.showMessageDialog(this, "wrong CardNo or CVC");
+                }
             } catch (SQLException ex) {
-                Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else if(CardNo.equals("") && CVC == 0){ 
-          
-          JOptionPane.showMessageDialog(this, "enter CardNo and CVC");
-          
-       }
-       
-       else if (!(CardNo.equals("")) && CVC == 0 ){
-           
-           JOptionPane.showMessageDialog(this, "enter CVC");
-       }
-       
-       else if ((CardNo.equals("")) && !(CVC == 0 ) ){
-           
-           JOptionPane.showMessageDialog(this, "enter CardNo");
-       } 
-       
-       else try {
-           if(mafenetre.vcard(u, CardNo, CVC)==true)
-           {
-               
-               JOptionPane.showMessageDialog(this, "Payement successfull");
-               
-               mafenetre.Ticket(id, mafenetre.recupIdMe(u), i, prix, s);
-               mafenetre.updatePrice(prix,u);
-               new Ticket(id).setVisible(true);
-               this.dispose();
-               
-               
-           }
-           else if(mafenetre.vcard(u, CardNo, CVC)==false)
-           {
-               
-               JOptionPane.showMessageDialog(this, "wrong CardNo or CVC");
-           }
-       } catch (SQLException ex) {
-            Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
         }
