@@ -9,5 +9,6 @@ package Modele;
  * @author arthur
  */
 public class Mail {
+     
     
 }
