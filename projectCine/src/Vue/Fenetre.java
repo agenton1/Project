@@ -132,6 +132,28 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
       {
           maconnexion.MAJFilm(img, time, real, genre, seance1, titre, seance2, seance3, prix, PlacesR1, PlacesR2, PlacesR3, id);
       }
+      
+      public int RecupOffre(String u,JLabel Offre) throws SQLException
+      {
+          return maconnexion.RecupOffre(u, Offre);
+      }
+      
+      public void Offre(int offre,String u) throws SQLException
+      {
+          maconnexion.Offre(offre,u);
+      }
+      
+      public ArrayList filmPoP() throws SQLException
+      {
+          return maconnexion.filmPoP();
+      }
+      
+      public String affFilmPOP(int a) throws SQLException
+      {
+          
+          return maconnexion.affFilmPOP(a);
+      }
+      
     
   @Override
     @SuppressWarnings("CallToThreadDumpStack")

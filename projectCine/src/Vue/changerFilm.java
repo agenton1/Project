@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,12 +19,14 @@ public class changerFilm extends javax.swing.JFrame {
     
     private Fenetre mafenetre = new Fenetre(false);
     int id;
+    String u;
     /**
      * Creates new form changerFilm
      */
-    public changerFilm(int i) throws SQLException, ClassNotFoundException{
+    public changerFilm(int i,String username) throws SQLException, ClassNotFoundException{
         initComponents();
         id=i;
+        u=username;
     }
 
     /**
@@ -263,17 +266,26 @@ public class changerFilm extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             mafenetre.MAJFilm(jTextField12.getText(), Integer.parseInt(jTextField2.getText()), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField1.getText(), jTextField6.getText(), jTextField7.getText(), Integer.parseInt(jTextField11.getText()), Integer.parseInt(jTextField8.getText()), Integer.parseInt(jTextField9.getText()), Integer.parseInt(jTextField10.getText()), id);
+            JOptionPane.showMessageDialog(this, "le film a bien été changé");
         } catch (SQLException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            new accueilEmploye(u).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // TODO add your handling code here:
-            new MAJ(id).setVisible(true);
+            new MAJ(id,u).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

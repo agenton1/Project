@@ -17,16 +17,18 @@ public class MAJFilm extends javax.swing.JFrame {
     
      private Fenetre mafenetre = new Fenetre(false);
      static int a,b,c,d;
+     String u;
      
     /**
      * Creates new form MAJFilm
      */
-    public MAJFilm() throws SQLException, ClassNotFoundException{
+    public MAJFilm(String username) throws SQLException, ClassNotFoundException{
         initComponents();
         a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1);
         b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,2);
         c=mafenetre.Film(jLabel10, jLabel12, jLabel11, jLabel9,3);
         d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,4);
+        u = username;
     }
 
     /**
@@ -58,6 +60,7 @@ public class MAJFilm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,11 +124,21 @@ public class MAJFilm extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Retour");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(590, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(26, 26, 26))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(86, 86, 86)
@@ -168,7 +181,10 @@ public class MAJFilm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(440, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(53, 53, 53))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(53, 53, 53)
@@ -227,7 +243,7 @@ public class MAJFilm extends javax.swing.JFrame {
          try {
              // TODO add your handling code here:
 
-             new MAJ(d).setVisible(true);
+             new MAJ(d,u).setVisible(true);
          } catch (SQLException ex) {
              Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
          } catch (ClassNotFoundException ex) {
@@ -243,7 +259,7 @@ public class MAJFilm extends javax.swing.JFrame {
 
          try {
              // TODO add your handling code here:
-             new MAJ(a).setVisible(true);
+             new MAJ(a,u).setVisible(true);
          } catch (SQLException ex) {
              Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
          } catch (ClassNotFoundException ex) {
@@ -260,7 +276,7 @@ public class MAJFilm extends javax.swing.JFrame {
              
              // TODO add your handling code here:
              
-             new MAJ(c).setVisible(true);
+             new MAJ(c,u).setVisible(true);
              
              //System.out.println(getId());
          } catch (SQLException ex) {
@@ -279,7 +295,7 @@ public class MAJFilm extends javax.swing.JFrame {
              
              // TODO add your handling code here:
 
-             new MAJ(b).setVisible(true);
+             new MAJ(b,u).setVisible(true);
          } catch (SQLException ex) {
              Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
          } catch (ClassNotFoundException ex) {
@@ -290,9 +306,22 @@ public class MAJFilm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         try {
+             // TODO add your handling code here:
+             new accueilEmploye(u).setVisible(true);
+         } catch (SQLException ex) {
+             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

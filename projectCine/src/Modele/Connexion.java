@@ -319,6 +319,69 @@ public class Connexion {
         stmt.executeUpdate(sql);
     }
     
+    public int RecupOffre(String u,JLabel Offre) throws SQLException
+    {
+        int o=0;
+        String sql = "SELECT Offre from Employee where Name = '"+u+"'";
+        rset = stmt.executeQuery(sql);
+        if(rset.next())
+        {
+            Offre.setText(rset.getString(1)+" %");
+            o=rset.getInt(1);
+        }
+        return o;
+    }
+    
+    public void Offre(int offre,String u) throws SQLException
+    {
+        String sql = "UPDATE Movie Set Prix = (Prix * "+offre+")/100";
+        String sql2 = "UPDATE Employee Set Offre = "+offre+" where Name = '"+u+"'";
+        stmt.executeUpdate(sql);
+        stmt.executeUpdate(sql2);
+    }
+    
+    public ArrayList filmPoP() throws SQLException
+    {
+        String sql = "select idMovie, Count(*) as nb From Ticket group by idMovie order by nb DESC";
+       // String sql2 = "select Title from Movie order by idMovie DESC";
+        rset=stmt.executeQuery(sql);
+        //rset = stmt.executeQuery(sql2);
+      
+        ArrayList<Integer> liste;
+        liste = new ArrayList<>();
+       
+        while (rset.next()){
+        // creation d'une ArrayList de String
+        
+        // Ajouter tous les champs du resultat dans l'ArrayList
+        // ajouter les champs de la ligne dans l'ArrayList
+        liste.add(rset.getInt(1));}
+
+        // Retourner l'ArrayList
+        return liste;
+    }
+    public String affFilmPOP(int a) throws SQLException
+    {
+        //ArrayList<String> liste;
+        //liste = new ArrayList<>();
+        String titre = null;
+         
+         String sql = "Select Title From Movie where idMovie = "+a+"";
+         rset=stmt.executeQuery(sql);
+          if(rset.next())
+          {
+              titre=rset.getString(1);
+          }
+         
+         //liste.add(rset.getString(1));
+
+        // Retourner l'ArrayList
+       return titre;
+        
+        
+    }
+    
+    
     private void dispose() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

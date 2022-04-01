@@ -153,7 +153,7 @@ public class connexionEmploye extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(this, "welcome");
 
-                new accueilEmploye().setVisible(true);
+                new accueilEmploye(username).setVisible(true);
                 this.dispose();
 
             }
@@ -164,6 +164,8 @@ public class connexionEmploye extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(connexionEmploye.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
