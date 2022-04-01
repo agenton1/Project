@@ -51,9 +51,13 @@ public class connexionframe extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+        jPasswordField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseExited(evt);
             }
         });
 
@@ -127,10 +131,6 @@ public class connexionframe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -167,8 +167,7 @@ public class connexionframe extends javax.swing.JFrame {
                
                new choixFilm(u).setVisible(true);
                this.dispose();
-               
-               
+             
            }
            else if(mafenetre.veri(username, Password)==false)
            {
@@ -201,6 +200,16 @@ public class connexionframe extends javax.swing.JFrame {
         new accueil().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jPasswordField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseEntered
+        // TODO add your handling code here:
+        jPasswordField1.setEchoChar('\u0000');
+    }//GEN-LAST:event_jPasswordField1MouseEntered
+
+    private void jPasswordField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseExited
+        // TODO add your handling code here:
+        jPasswordField1.setEchoChar('\u25cf');
+    }//GEN-LAST:event_jPasswordField1MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

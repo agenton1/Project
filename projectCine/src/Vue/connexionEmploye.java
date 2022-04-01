@@ -62,6 +62,14 @@ public class connexionEmploye extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseExited(evt);
+            }
+        });
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -195,6 +203,16 @@ public class connexionEmploye extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPasswordField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseEntered
+        // TODO add your handling code here:
+        jPasswordField1.setEchoChar('\u0000');
+    }//GEN-LAST:event_jPasswordField1MouseEntered
+
+    private void jPasswordField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseExited
+        // TODO add your handling code here:
+        jPasswordField1.setEchoChar('\u25cf');
+    }//GEN-LAST:event_jPasswordField1MouseExited
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

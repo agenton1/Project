@@ -5,6 +5,8 @@
 package Vue;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,16 +15,17 @@ import java.sql.SQLException;
 public class FilmPop extends javax.swing.JFrame {
     
     private Fenetre mafenetre = new Fenetre(false);
+    String u;
     /**
      * Creates new form FilmPop
      */
-    public FilmPop()throws SQLException, ClassNotFoundException {
+    public FilmPop(String username)throws SQLException, ClassNotFoundException {
         initComponents();
         jLabel1.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(0)))) ;
         jLabel2.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(1)))) ;
         jLabel3.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(2)))) ;
         jLabel4.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(3)))) ;
-        //jLabel1.setText(.get(0)));
+        u=username;
     }
 
     /**
@@ -38,6 +41,7 @@ public class FilmPop extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,18 +53,30 @@ public class FilmPop extends javax.swing.JFrame {
 
         jLabel4.setText("jLabel4");
 
+        jButton1.setText("Retour");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jButton1)))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
@@ -68,7 +84,7 @@ public class FilmPop extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2)
@@ -76,7 +92,9 @@ public class FilmPop extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel4)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jButton1)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
@@ -84,9 +102,22 @@ public class FilmPop extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new accueilEmploye(u).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmPop.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FilmPop.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

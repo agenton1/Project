@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class accueilEmploye extends javax.swing.JFrame {
     
-     private Fenetre mafenetre = new Fenetre(false);
+   private Fenetre mafenetre = new Fenetre(false);
    String u;
     /**
      * Creates new form accueilEmploye
@@ -55,7 +55,7 @@ public class accueilEmploye extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("liste ticket");
+        jButton3.setText("Maintenance Membre");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -80,21 +80,20 @@ public class accueilEmploye extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(292, 292, 292)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(jButton2)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton3)))
-                .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(310, 310, 310))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +116,7 @@ public class accueilEmploye extends javax.swing.JFrame {
          try {
              // TODO add your handling code here:
              mafenetre.filmPoP();
-            new FilmPop().setVisible(true);
+            new FilmPop(u).setVisible(true);
          } catch (SQLException ex) {
              Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
          } catch (ClassNotFoundException ex) {
@@ -127,7 +126,15 @@ public class accueilEmploye extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       try {
+           // TODO add your handling code here:
+           new maintenanceM(u).setVisible(true);
+       } catch (SQLException ex) {
+           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        this.dispose();
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

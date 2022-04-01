@@ -53,7 +53,7 @@ public class Connexion {
 
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
         String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;
-       // String urlDatabase = "jdbc:mysql://localhost:3308/jps?characterEncoding=latin1";
+        // String urlDatabase = "jdbc:mysql://localhost:3308/jps?characterEncoding=latin1";
 
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
@@ -84,6 +84,14 @@ public class Connexion {
         return vf;
         
     }
+    
+     public void NMember(String username, String Nusername, String Npassword)throws SQLException
+     {
+        String sql = "Update Member set Mail = '"+Nusername+"', Password = '"+Npassword+"'where Mail = '"+username+"'";
+        stmt.executeUpdate(sql);
+     }
+   
+    
     
      public boolean verifE(String password, String username) throws SQLException
     {

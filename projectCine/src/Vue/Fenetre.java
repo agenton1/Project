@@ -48,6 +48,11 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
         return maconnexion.verif(username, password);
     }
     
+    public void NMember(String username, String Nusername, String Npassword)throws SQLException
+    {
+        maconnexion.NMember(username, Nusername, Npassword);
+    }
+    
      public boolean veriE(String password,String username) throws SQLException
     {
         return maconnexion.verifE(password, username);
