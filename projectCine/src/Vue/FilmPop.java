@@ -13,19 +13,27 @@ import java.util.logging.Logger;
  * @author arthur
  */
 public class FilmPop extends javax.swing.JFrame {
-    
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     String u;
+
     /**
-     * Creates new form FilmPop
+     * Creates new form FilmPop Crontstructeur et initialisation JFrame des
+     * films populaires
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public FilmPop(String username)throws SQLException, ClassNotFoundException {
+    public FilmPop(String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        jLabel1.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(0)))) ;
-        jLabel2.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(1)))) ;
-        jLabel3.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(2)))) ;
-        jLabel4.setText(mafenetre.affFilmPOP((Integer)(mafenetre.filmPoP().get(3)))) ;
-        u=username;
+        //Appel des fonction d'affichage et de tri des films populaires
+        jLabel1.setText(mafenetre.affFilmPOP((Integer) (mafenetre.filmPoP().get(0))));
+        jLabel2.setText(mafenetre.affFilmPOP((Integer) (mafenetre.filmPoP().get(1))));
+        jLabel3.setText(mafenetre.affFilmPOP((Integer) (mafenetre.filmPoP().get(2))));
+        jLabel4.setText(mafenetre.affFilmPOP((Integer) (mafenetre.filmPoP().get(3))));
+        //u prend la valeur de l'username passé en parametre
+        u = username;
     }
 
     /**
@@ -102,19 +110,18 @@ public class FilmPop extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Bouton de retour vers la page d'accueil des employés
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //nouvelle fenetre accueil employe tout en gérant les exceptions
         try {
-            // TODO add your handling code here:
             new accueilEmploye(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(FilmPop.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(FilmPop.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Suppresion de la fenetre que nous quitton en appuyant sur le bouton
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

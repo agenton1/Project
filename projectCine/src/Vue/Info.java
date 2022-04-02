@@ -4,7 +4,6 @@
  */
 package Vue;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,18 +13,23 @@ import java.util.logging.Logger;
  * @author arthur
  */
 public class Info extends javax.swing.JFrame {
-    
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     int id;
     String u;
     /**
-     * Creates new form Info
+     * Creates new form Info Crontstructeur et initialisation JFrame des
+     * Informations du film sélectionné
+     * @param i
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     public Info(int i, String username) throws SQLException, ClassNotFoundException{
         id =i;
         u=username;
         initComponents();
-
+        //appelle de la fonction FilmInfo et affichage des données sur les Jlabels passés en paramètre
         mafenetre.FilmInfo(jLabel9, jLabel10, jLabel13, jLabel14, jLabel15, jLabel12, jLabel11, jLabel1, id);
        
         
@@ -193,38 +197,35 @@ public class Info extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton de retour vers ChoixFilm
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //nouvelle fenetre choixFilm tout en gérant les exceptions
         try {
-            // TODO add your handling code here:
             new choixFilm(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Suppresion de la fenetre que nous quitton en appuyant sur le bouton
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    //bouton permettant de reserver le film selectionné et de passé à la page de selection de la seance 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
+        //Si le client est un membre alors création de la JFrame de reservation de seance pour membre
         if(!u.equals("guest"))
         {
         try {
-            // TODO add your handling code here:
             new Reserver(jLabel13.getText(), jLabel14.getText(), jLabel15.getText(),id ,u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();}
+        //Sinon  création de la JFrame de reservation de seance pour les visiteurs
         else{
             try {
-            // TODO add your handling code here:
             new ReserverG(jLabel13.getText(), jLabel14.getText(), jLabel15.getText(),id ,u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();

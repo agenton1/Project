@@ -16,12 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class connexionframe extends javax.swing.JFrame {
 
+    //creation d'un objet privé de Fentre
+    private Fenetre mafenetre = new Fenetre(false);
     static String u;
+
     /**
      * Creates new form connexionframe
+     *
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    private Fenetre mafenetre = new Fenetre(false);
-    
+
     public connexionframe() throws SQLException, ClassNotFoundException {
         initComponents();
     }
@@ -44,12 +49,6 @@ public class connexionframe extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jPasswordField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,83 +130,66 @@ public class connexionframe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
+//bouton permettant de verifier les identifiant du membre souhaitant se connecter par rapport à ceux de la bdd
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        //mafenetre.remplirTables();
-        
+
         String username = jTextField1.getText();
         String Password = jPasswordField1.getText();
-       
-              
-       if(username.equals("") && Password.equals("")){ 
-          
-          JOptionPane.showMessageDialog(this, "enter username and password");
-          
-       }
-       
-       else if (!(username.equals("")) && Password.equals("") ){
-           
-           JOptionPane.showMessageDialog(this, "enter password");
-       }
-       
-       else if ((username.equals("")) && !(Password.equals("")) ){
-           
-           JOptionPane.showMessageDialog(this, "enter username");
-       } 
-       
-       else try {
-           if(mafenetre.veri(username, Password)==true)
-           {
-               u=username;
-               JOptionPane.showMessageDialog(this, "welcome");
-               
-               new choixFilm(u).setVisible(true);
-               this.dispose();
-             
-           }
-           else if(mafenetre.veri(username, Password)==false)
-           {
-               
-               JOptionPane.showMessageDialog(this, "wrong");
-           }
-       } catch (SQLException ex) {
-            Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+        if (username.equals("") && Password.equals("")) {
+
+            JOptionPane.showMessageDialog(this, "enter username and password");
+
+        } else if (!(username.equals("")) && Password.equals("")) {
+
+            JOptionPane.showMessageDialog(this, "enter password");
+        } else if ((username.equals("")) && !(Password.equals(""))) {
+
+            JOptionPane.showMessageDialog(this, "enter username");
+        } else try {
+            if (mafenetre.veri(username, Password) == true) {
+                u = username;
+                JOptionPane.showMessageDialog(this, "welcome");
+
+                new choixFilm(u).setVisible(true);
+                this.dispose();
+
+            } else if (mafenetre.veri(username, Password) == false) {
+
+                JOptionPane.showMessageDialog(this, "wrong");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //bouton permettant de s'inscrire en tant que membre
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
             new inscription().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour à l'accueil
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
         new accueil().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //les 2 méthode suivante permette d'afficher ou masquer le mot de passe entré par l'employé en passant la souris dessus ou non 
     private void jPasswordField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseEntered
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u0000');
     }//GEN-LAST:event_jPasswordField1MouseEntered
 
     private void jPasswordField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseExited
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u25cf');
     }//GEN-LAST:event_jPasswordField1MouseExited
 

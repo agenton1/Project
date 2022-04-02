@@ -16,17 +16,24 @@ import javax.swing.JOptionPane;
  * @author arthur
  */
 public class changerFilm extends javax.swing.JFrame {
-    
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     int id;
     String u;
+
     /**
      * Creates new form changerFilm
+     *
+     * @param i
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public changerFilm(int i,String username) throws SQLException, ClassNotFoundException{
+    public changerFilm(int i, String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        id=i;
-        u=username;
+        id = i;
+        u = username;
     }
 
     /**
@@ -66,36 +73,6 @@ public class changerFilm extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
-
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
-
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Titre");
 
@@ -242,59 +219,34 @@ public class changerFilm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
+    //bouton permettant de valider le changement du film
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
+            //appel de la méthode de mise à jour des film avec en paramètre toutes les données saisies par l'employé
             mafenetre.MAJFilm(jTextField12.getText(), Integer.parseInt(jTextField2.getText()), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField1.getText(), jTextField6.getText(), jTextField7.getText(), Integer.parseInt(jTextField11.getText()), Integer.parseInt(jTextField8.getText()), Integer.parseInt(jTextField9.getText()), Integer.parseInt(jTextField10.getText()), id);
             JOptionPane.showMessageDialog(this, "le film a bien été changé");
-        } catch (SQLException ex) {
-            Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
+        } catch (SQLException | FileNotFoundException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             new accueilEmploye(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour à la page précédente 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            // TODO add your handling code here:
-            new MAJ(id,u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+           
+            new MAJ(id, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(changerFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

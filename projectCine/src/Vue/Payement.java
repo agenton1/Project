@@ -4,7 +4,6 @@
  */
 package Vue;
 
-import static Vue.connexionframe.u;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,32 +15,39 @@ import javax.swing.JOptionPane;
  */
 public class Payement extends javax.swing.JFrame {
 
+    //creation d'un objet privé de Fentre 
     private Fenetre mafenetre = new Fenetre(false);
-    String u,s;
+    String u, s;
     double prix;
     int i;
+
     /**
-     * Creates new form Payement
+     * Creates new form Payement Constructeur de la Jframe de payement
+     *
+     * @param username
+     * @param p
+     * @param seance
+     * @param id
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public Payement(String username, double p, String seance, int id)throws SQLException, ClassNotFoundException {
+    public Payement(String username, double p, String seance, int id) throws SQLException, ClassNotFoundException {
         initComponents();
-        jLabel2.setText(""+p+" €");
-        if(!username.equals("guest"))
-        {
-            jLabel6.setText(""+mafenetre.balance(username)+" €");
-        }
-        
-        else if (username.equals("guest"))
-        {
+        //affichage du prix à payer
+        jLabel2.setText("" + p + " €");
+        //si c'est un membre, affichage de sa balance 
+        if (!username.equals("guest")) {
+            jLabel6.setText("" + mafenetre.balance(username) + " €");
+        } //si c'est un visiteur, affichage du message suivant
+        else if (username.equals("guest")) {
             jLabel6.setText("vous n'avez pas de compte chez nous");
         }
-      
-        u=username;
-        prix=p;
-        s=seance;
-        i=id;
-        
-        
+
+        u = username;
+        prix = p;
+        s = seance;
+        i = id;
+
     }
 
     /**
@@ -68,12 +74,6 @@ public class Payement extends javax.swing.JFrame {
         jLabel1.setText("A payer");
 
         jLabel2.setText("jLabel2");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("CardNo");
 
@@ -149,70 +149,60 @@ public class Payement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Bouton permettant de valider le payement 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         String CardNo = jTextField1.getText();
         int CVC = Integer.parseInt(jTextField2.getText());
         int id = 0;
         int g = 0;
         id = (int) (1 + (Math.random() * (999 - 1)));
         g = (int) (1 + (Math.random() * (999 - 1)));
-        
+
+        //comparaison entre le montant de la balance et le montant à payer
         try {
-            if(!u.equals("guest") && ((mafenetre.balance(u)==0) || ((mafenetre.balance(u)-prix)<0)))
-            {
-                
+            //si balance trop faible il faut ajouter de l'argent à la balance
+            if (!u.equals("guest") && ((mafenetre.balance(u) == 0) || ((mafenetre.balance(u) - prix) < 0))) {
+
                 JOptionPane.showMessageDialog(this, "balance trop faible. Veuillez renflouer la balance");
                 new ajoutbal(u, prix, s, i).setVisible(true);
                 this.dispose();
-            }
-            
-            else if(u.equals("guest"))
-            {
+            } //si le client est un visiteur , validation du payement sans se soucier de la balance car il n'a aucun compte dans le cinema
+            else if (u.equals("guest")) {
                 JOptionPane.showMessageDialog(this, "Payement successfull");
                 try {
                     mafenetre.Ticket(id, String.valueOf(g), i, prix, s);
                     new Ticket(id).setVisible(true);
                     this.dispose();
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            else if(CardNo.equals("") && CVC == 0){
-                
+            } //verification que les champs de crate bancaire soient bien remplis
+            else if (CardNo.equals("") && CVC == 0) {
+
                 JOptionPane.showMessageDialog(this, "enter CardNo and CVC");
-                
-            }
-            
-            else if (!(CardNo.equals("")) && CVC == 0 ){
-                
+
+            } else if (!(CardNo.equals("")) && CVC == 0) {
+
                 JOptionPane.showMessageDialog(this, "enter CVC");
-            }
-            
-            else if ((CardNo.equals("")) && !(CVC == 0 ) ){
-                
+            } else if ((CardNo.equals("")) && !(CVC == 0)) {
+
                 JOptionPane.showMessageDialog(this, "enter CardNo");
-            }
-            
-            else try {
-                if(mafenetre.vcard(u, CardNo, CVC)==true)
-                {
-                    
+            } else try {
+                //si le client est membre et que les données bancaires sont nous pouvons approuver le payelent,créer le ticket et mettre à jour la balance du membre
+                if (mafenetre.vcard(u, CardNo, CVC) == true) {
+
                     JOptionPane.showMessageDialog(this, "Payement successfull");
-                    
+
                     mafenetre.Ticket(id, u, i, prix, s);
-                    mafenetre.updatePrice(prix,u);
+                    mafenetre.updatePrice(prix, u);
                     new Ticket(id).setVisible(true);
                     this.dispose();
-                    
-                    
-                }
-                else if(mafenetre.vcard(u, CardNo, CVC)==false)
-                {
-                    
+
+                } //Si non afficher Wrong et recommencer à saisir les données de CB
+                else if (mafenetre.vcard(u, CardNo, CVC) == false) {
+
                     JOptionPane.showMessageDialog(this, "wrong CardNo or CVC");
                 }
             } catch (SQLException ex) {
@@ -220,18 +210,11 @@ public class Payement extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Payement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

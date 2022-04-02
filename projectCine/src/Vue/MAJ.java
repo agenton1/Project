@@ -13,17 +13,24 @@ import java.util.logging.Logger;
  * @author arthur
  */
 public class MAJ extends javax.swing.JFrame {
-    
+    //creation d'un objet privé de Fentre 
     private Fenetre mafenetre = new Fenetre(false);
     int id;
     String u;
+
     /**
      * Creates new form MAJ
+     *
+     * @param i
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public MAJ(int i,String username) throws SQLException, ClassNotFoundException{
+    public MAJ(int i, String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        id=i;
-        u=username;
+        id = i;
+        u = username;
+        //appel de la méthode FilmInfo et affichage des données de la bdd sur la JFrame
         mafenetre.FilmInfo(jLabel9, jLabel10, jLabel13, jLabel14, jLabel15, jLabel12, jLabel11, jLabel1, id);
     }
 
@@ -179,34 +186,30 @@ public class MAJ extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton permettant de changer le film selectionné 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            
+
         try {
-            new changerFilm(id,u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(MAJ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            new changerFilm(id, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MAJ.class.getName()).log(Level.SEVERE, null, ex);
         }
-       this.dispose();
-           
+        this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //bouton de retour vers MAJFilm
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
-            // TODO add your handling code here:
             new MAJFilm(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(MAJ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MAJ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

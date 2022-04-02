@@ -14,12 +14,18 @@ import javax.swing.JOptionPane;
  * @author arthur
  */
 public class InscriptionE extends javax.swing.JFrame {
-     
+
+    //creation d'un objet privé de Fentre 
     private Fenetre mafenetre = new Fenetre(false);
+
     /**
-     * Creates new form InscriptionE
+     * Creates new form InscriptionE Crontstructeur et initialisation JFrame des
+     * Inscriptions des employées
+     *
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public InscriptionE() throws SQLException, ClassNotFoundException{
+    public InscriptionE() throws SQLException, ClassNotFoundException {
         initComponents();
     }
 
@@ -121,36 +127,41 @@ public class InscriptionE extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    //bouton pour valider l'inscription de l'employé
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        //recuperation du text saisie lors de l'inscription
         String Mail = jTextField1.getText();
         String Mdp = jTextField2.getText();
         int id = 0;
+        //création d'un id aleatoire pour l'employé
         id = (int) (1 + (Math.random() * (999 - 1)));
 
-
+        //appel de la fonction d'inscription de l'employé dans la bdd en gérant les exceptions et retour sur la page d'accueil employé
         try {
             mafenetre.inscE(id, Mdp, Mail);
             JOptionPane.showMessageDialog(this, "Employe ajoute");
+            new accueilEmploye(Mail).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(inscription.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InscriptionE.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour vers la page de connexion employé
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // TODO add your handling code here:
             new connexionEmploye().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(InscriptionE.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(InscriptionE.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

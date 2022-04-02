@@ -14,12 +14,17 @@ import javax.swing.JOptionPane;
  * @author arthur
  */
 public class connexionEmploye extends javax.swing.JFrame {
-    
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
+
     /**
      * Creates new form connexionEmploye
+     *
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public connexionEmploye()throws SQLException, ClassNotFoundException {
+    public connexionEmploye() throws SQLException, ClassNotFoundException {
         initComponents();
     }
 
@@ -56,23 +61,12 @@ public class connexionEmploye extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPasswordField1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPasswordField1MouseExited(evt);
-            }
-        });
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
             }
         });
 
@@ -132,41 +126,31 @@ public class connexionEmploye extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton permettant de verifier les identifiant de l'employé souhaitant se connecter par rapport à ceux de la bdd
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        //mafenetre.remplirTables();
 
         String username = jTextField1.getText();
         String Password = jPasswordField1.getText();
 
-        if(username.equals("") && Password.equals("")){
+        if (username.equals("") && Password.equals("")) {
 
             JOptionPane.showMessageDialog(this, "enter username and password");
 
-        }
-
-        else if (!(username.equals("")) && Password.equals("") ){
+        } else if (!(username.equals("")) && Password.equals("")) {
 
             JOptionPane.showMessageDialog(this, "enter password");
-        }
-
-        else if ((username.equals("")) && !(Password.equals("")) ){
+        } else if ((username.equals("")) && !(Password.equals(""))) {
 
             JOptionPane.showMessageDialog(this, "enter username");
-        }
+        } else try {
+            if (mafenetre.veriE(Password, username) == true) {
 
-        else try {
-            if(mafenetre.veriE(Password, username)==true)
-            {
-                
                 JOptionPane.showMessageDialog(this, "welcome");
 
                 new accueilEmploye(username).setVisible(true);
                 this.dispose();
 
-            }
-            else if(mafenetre.veriE(Password, username)==false)
-            {
+            } else if (mafenetre.veriE(Password, username) == false) {
 
                 JOptionPane.showMessageDialog(this, "wrong");
             }
@@ -178,43 +162,36 @@ public class connexionEmploye extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //bouton de retour à l'acceuil
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
         new accueil().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
+    //bouton permettant de s'inscrire en tant qu'employé
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
+
             new InscriptionE().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(connexionframe.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //les 2 méthode suivante permette d'afficher ou masquer le mot de passe entré par l'employé en passant la souris dessus ou non 
     private void jPasswordField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseEntered
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u0000');
     }//GEN-LAST:event_jPasswordField1MouseEntered
 
     private void jPasswordField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseExited
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u25cf');
     }//GEN-LAST:event_jPasswordField1MouseExited
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -12,27 +12,36 @@ import java.util.logging.Logger;
  *
  * @author arthur
  */
-
-
 public class Recapitulatif extends javax.swing.JFrame {
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     String u;
     double prix;
     String seance;
     int i;
+
     /**
-     * Creates new form Recapitulatif
+     * Creates new form Recapitulatif et Constructeur
+     *
+     * @param id
+     * @param s
+     * @param p
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public Recapitulatif(int id, String s, double p, String username) throws SQLException, ClassNotFoundException{
+    public Recapitulatif(int id, String s, double p, String username) throws SQLException, ClassNotFoundException {
         initComponents();
+        //appel de la fonction de Récapitulatif de la commande souhaitée et affichage de celle-ci sur la JFrame avec des JLabel
         mafenetre.Recap(jLabel3, jLabel5, jLabel7, jLabel9, jLabel1, id);
         jLabel11.setText(s);
-        jLabel13.setText(""+p+" €");
-        u=username;
-        prix=p;
-        seance=s;
-        i=id;
-        
+        jLabel13.setText("" + p + " €");
+        u = username;
+        prix = p;
+        seance = s;
+        i = id;
+
     }
 
     /**
@@ -163,19 +172,17 @@ public class Recapitulatif extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton permettant de procéder au payement
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
-            new Payement(u,prix,seance,i).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Recapitulatif.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            new Payement(u, prix, seance, i).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Recapitulatif.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

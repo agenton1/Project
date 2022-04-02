@@ -13,15 +13,21 @@ import java.util.logging.Logger;
  * @author arthur
  */
 public class accueilEmploye extends javax.swing.JFrame {
-    
-   private Fenetre mafenetre = new Fenetre(false);
-   String u;
+
+    //creation d'un objet privé de Fentre
+    private Fenetre mafenetre = new Fenetre(false);
+    String u;
+
     /**
      * Creates new form accueilEmploye
+     *
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public accueilEmploye(String username)throws SQLException, ClassNotFoundException {
+    public accueilEmploye(String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        u=username;
+        u = username;
     }
 
     /**
@@ -112,66 +118,62 @@ public class accueilEmploye extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton permettant d'afficher les films populaires
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         try {
-             // TODO add your handling code here:
-             mafenetre.filmPoP();
-            new FilmPop(u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       try {
-           // TODO add your handling code here:
-           new maintenanceM(u).setVisible(true);
-       } catch (SQLException ex) {
-           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-       }
-        this.dispose();
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
-            new MAJFilm(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            mafenetre.filmPoP();
+            new FilmPop(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-            
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    //bouton pemettant d'acceder à la page de maintenance des membres 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+
+            new maintenanceM(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    //bouton permettant d'accéder à la page de MAJ des films à l'affiche 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+
+            new MAJFilm(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour vers l'accueil du site
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
         new accueil().setVisible(true);
         this.dispose();
-                
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    //bouton permettant d'acceder à la page des offres
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       try {
-           // TODO add your handling code here:
-           new Offre(u).setVisible(true);
-       } catch (SQLException ex) {
-           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+
+            new Offre(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(accueilEmploye.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

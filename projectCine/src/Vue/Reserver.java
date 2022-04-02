@@ -17,27 +17,38 @@ import javax.swing.JOptionPane;
  */
 public class Reserver extends javax.swing.JFrame {
     
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     int i;
-    double p,pm;
+    double p, pm;
     String u;
-   
+
     /**
-     * Creates new form Reserver
+     * Creates new form Reserver pour les membres et Constructeur
+     *
+     * @param s1
+     * @param s2
+     * @param s3
+     * @param id
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public Reserver(String s1, String s2, String s3,int id, String username)throws SQLException, ClassNotFoundException {
-        
-        i=id;
-        u=username;
+    public Reserver(String s1, String s2, String s3, int id, String username) throws SQLException, ClassNotFoundException {
+
+        i = id;
+        u = username;
         initComponents();
+        //affichage des seance sur les boutons pour une meilleure hergonomie
         jButton3.setText(s1);
         jButton4.setText(s2);
         jButton5.setText(s3);
-        p=mafenetre.res(jLabel4, jLabel5, jLabel6, jLabel8, id);
-        
-       
-        pm=p-((p*mafenetre.prixm(username))/100);
-        jLabel10.setText(""+pm+" €");
+        //affichage des données du films demandées à savoir les nombres de places par seance et le prix ainsi que le prix apres réduction
+        p = mafenetre.res(jLabel4, jLabel5, jLabel6, jLabel8, id);
+
+        //Application de la reduction et affichage du prix apres réduction
+        pm = p - ((p * mafenetre.prixm(username)) / 100);
+        jLabel10.setText("" + pm + " €");
     }
 
     /**
@@ -186,97 +197,82 @@ public class Reserver extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //retour à la page précédente
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         try {
-             // TODO add your handling code here:
-             new choixFilm(u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+
+            new choixFilm(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //les 3 bouton suivant créer le récapitulatif en fonction du bonton choisi et donc de la séance choisie tout en mettant à jour le nombre de place par séance 
+    //avec la fonction updateplaces
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
         String s = null;
-        
-        if( (Integer.parseInt(jLabel5.getText()))!=0)
-        {
-            s=jButton4.getText();
-            
+
+        if ((Integer.parseInt(jLabel5.getText())) != 0) {
+            s = jButton4.getText();
+
             try {
-                mafenetre.updateplaces(2,i,0);
-                new Recapitulatif(i,s,pm,u).setVisible(true);
-             
-            } catch (SQLException ex) {
-                Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                mafenetre.updateplaces(2, i, 0);
+                new Recapitulatif(i, s, pm, u).setVisible(true);
+
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
-        }
-        
-         else if( (Integer.parseInt(jLabel5.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton4.getText()+"");
+        } //verification que la salle ne soit pas complète pour la séance demandée
+        else if ((Integer.parseInt(jLabel5.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton4.getText() + "");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+
         String s = null;
-        
-        if( (Integer.parseInt(jLabel6.getText()))!=0)
-        {
-            s=jButton5.getText();
-            
+
+        if ((Integer.parseInt(jLabel6.getText())) != 0) {
+            s = jButton5.getText();
+
             try {
-                mafenetre.updateplaces(3,i,0);
-                new Recapitulatif(i,s,pm,u).setVisible(true);
-             
-            } catch (SQLException ex) {
-                Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                mafenetre.updateplaces(3, i, 0);
+                new Recapitulatif(i, s, pm, u).setVisible(true);
+
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
-        }
-        
-         else if( (Integer.parseInt(jLabel6.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton5.getText()+"");
+        } //verification que la salle ne soit pas complète pour la séance demandée
+        else if ((Integer.parseInt(jLabel6.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton5.getText() + "");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:`
+
         String s = null;
-        
-        if( (Integer.parseInt(jLabel4.getText()))!=0)
-        {
-            s=jButton3.getText();
-            
+
+        if ((Integer.parseInt(jLabel4.getText())) != 0) {
+            s = jButton3.getText();
+
             try {
-                mafenetre.updateplaces(1,i,0);
-                new Recapitulatif(i,s,pm,u).setVisible(true);
-             
-            } catch (SQLException ex) {
-                Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                mafenetre.updateplaces(1, i, 0);
+                new Recapitulatif(i, s, pm, u).setVisible(true);
+
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
-        }
-        
-         else if( (Integer.parseInt(jLabel4.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton3.getText()+"");
+        } //verification que la salle ne soit pas complète pour la séance demandée
+        else if ((Integer.parseInt(jLabel4.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton3.getText() + "");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

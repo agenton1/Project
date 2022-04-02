@@ -96,50 +96,46 @@ public class accueil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boutonn permettant de s'inscrire en tant que membre
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
+
             new inscription().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton permettant d'acceder à la page de connexion membre
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            // TODO add your handling code here:
+
             new connexionframe().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //bouton permettant d'acceder à la page de connexion employé
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            // TODO add your handling code here:
+
             new connexionEmploye().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //bouton permettant d'accéder à la page choixFilm directement en tant que visiteur  
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            // TODO add your handling code here:
+
             new choixFilm("guest").setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(accueil.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();

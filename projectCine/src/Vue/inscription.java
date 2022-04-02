@@ -16,11 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class inscription extends javax.swing.JFrame {
 
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
+
     /**
      * Creates new form inscription
+     *
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public inscription()throws SQLException, ClassNotFoundException {
+    public inscription() throws SQLException, ClassNotFoundException {
         initComponents();
     }
 
@@ -54,36 +59,6 @@ public class inscription extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Mail");
 
         jLabel2.setText("Prenom");
@@ -108,27 +83,9 @@ public class inscription extends javax.swing.JFrame {
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("CardNo");
 
         jLabel7.setText("CVC");
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Balance");
 
@@ -217,28 +174,9 @@ public class inscription extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
+    //bouton permettant de pousser toutes les données saisit dans la bdd en créant une nouvelle ligne à la table Membre
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         String Mail = jTextField1.getText();
         String Prenom = jTextField2.getText();
         String Nom = jTextField3.getText();
@@ -249,60 +187,38 @@ public class inscription extends javax.swing.JFrame {
         int balance = Integer.parseInt(jTextField8.getText());
         int id = 0;
         double reduc = 0;
+        //Id de membre aléatoire
         id = (int) (1 + (Math.random() * (999 - 1)));
-        
-        if(Age<10)
-        {
-            reduc=75;
+
+        //application d'une réduction en fonction de l'age du membre
+        if (Age < 10) {
+            reduc = 75;
+        } else if (Age >= 10 && Age < 15) {
+            reduc = 50;
+        } else if (Age >= 15 && Age < 25) {
+            reduc = 25;
+        } else if (Age >= 65) {
+            reduc = 50;
         }
-        
-        else if(Age>=10 && Age<15)
-        {
-            reduc=50;
-        }
-        
-        else if(Age>=15 && Age<25)
-        {
-            reduc=25;
-        }
-        
-        else if(Age>=65)
-        {
-            reduc=50;
-        }
-        
-        
-        
+
+        //appel de la fonction permettant de créer la nouvelle ligne dans la table de la bdd
         try {
-            mafenetre.insc(id, Mail, Prenom, Nom, Mdp, Age, reduc,CardNo, CVC, balance);
+            mafenetre.insc(id, Mail, Prenom, Nom, Mdp, Age, reduc, CardNo, CVC, balance);
             JOptionPane.showMessageDialog(this, "membre ajoute");
         } catch (SQLException ex) {
             Logger.getLogger(inscription.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour vers la page d'accueil
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         new accueil().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

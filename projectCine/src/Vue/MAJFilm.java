@@ -7,27 +7,32 @@ package Vue;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author arthur
  */
 public class MAJFilm extends javax.swing.JFrame {
-    
-     private Fenetre mafenetre = new Fenetre(false);
-     static int a,b,c,d;
-     String u;
-     
+    //creation d'un objet privé de Fentre 
+    private Fenetre mafenetre = new Fenetre(false);
+    static int a, b, c, d;
+    String u;
+
     /**
-     * Creates new form MAJFilm
+     * Creates new form MAJFilm Constructeur et Initialisation de la page de
+     * MAJFilm
+     *
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public MAJFilm(String username) throws SQLException, ClassNotFoundException{
+    public MAJFilm(String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1);
-        b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,2);
-        c=mafenetre.Film(jLabel10, jLabel12, jLabel11, jLabel9,3);
-        d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,4);
+        //Affichage des different film de la bdd
+        a = mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1, 1);
+        b = mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5, 2);
+        c = mafenetre.Film(jLabel10, jLabel12, jLabel11, jLabel9, 3);
+        d = mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15, 4);
         u = username;
     }
 
@@ -239,86 +244,63 @@ public class MAJFilm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //les 4 boutons suivant permettent d'effectuer la maj sur le film au desssus du bouton selectionné
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-         try {
-             // TODO add your handling code here:
+        try {
 
-             new MAJ(d,u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-        //System.out.println(getId());
+            new MAJ(d, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
+        try {
 
-         try {
-             // TODO add your handling code here:
-             new MAJ(a,u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            new MAJ(a, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        
         this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         try {
-             // TODO add your handling code here:
-             
-             // TODO add your handling code here:
-             
-             new MAJ(c,u).setVisible(true);
-             
-             //System.out.println(getId());
-         } catch (SQLException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
 
-        
+            new MAJ(c, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         try {
-             // TODO add your handling code here:
-             
-             // TODO add your handling code here:
+        try {
 
-             new MAJ(b,u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            new MAJ(b, u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-            //System.out.println(getId());
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    //bouton de retour 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-             // TODO add your handling code here:
-             new accueilEmploye(u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+
+            new accueilEmploye(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MAJFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

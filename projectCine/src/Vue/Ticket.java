@@ -11,16 +11,23 @@ import java.sql.SQLException;
  * @author arthur
  */
 public class Ticket extends javax.swing.JFrame {
-      private Fenetre mafenetre = new Fenetre(false);
+
+    //creation d'un objet privé de Fentre
+    private Fenetre mafenetre = new Fenetre(false);
+
     /**
-     * Creates new form Ticket
+     * Creates new form Ticket et Constructeur
+     *
+     * @param id
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public Ticket(int id)throws SQLException, ClassNotFoundException {
+    public Ticket(int id) throws SQLException, ClassNotFoundException {
         initComponents();
+        //Fonction d'affichage du ticket
         mafenetre.affTicket(jLabel4, jLabel6, jLabel8, jLabel10, id);
-        jLabel2.setText(""+id+"");
-        
-        
+        jLabel2.setText("" + id + "");
+
     }
 
     /**
@@ -115,8 +122,6 @@ public class Ticket extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

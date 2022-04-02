@@ -16,14 +16,18 @@ public class Controleur {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
-               Connexion C = new Connexion("project","root","root");
-               Fenetre F = new Fenetre(true);
-                       
+        //création des objets necéssaires au fonctionnement du programmme
+        
+        //Initialisation de la connexion à la bdd
+        Connexion C = new Connexion("project", "root", "root");
+        //Initialisation de la Fenetre d'affichage
+        Fenetre F = new Fenetre(true);
 
-        // TODO code application logic here
     }
-    
+
 }

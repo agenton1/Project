@@ -1,4 +1,3 @@
-
 package Vue;
 
 import java.sql.SQLException;
@@ -14,26 +13,34 @@ import javax.swing.JOptionPane;
  */
 public class ReserverG extends javax.swing.JFrame {
 
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     int i;
     double p;
     String u;
+
     /**
-     * Creates new form ReserverG
+     * Creates new form ReserverG Commentaire similaire à la Jframe Reserver
+     *
+     * @param s1
+     * @param s2
+     * @param s3
+     * @param id
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public ReserverG(String s1, String s2, String s3,int id, String username)throws SQLException, ClassNotFoundException {
-        
-        i=id;
-        u=username;
+    public ReserverG(String s1, String s2, String s3, int id, String username) throws SQLException, ClassNotFoundException {
+
+        i = id;
+        u = username;
         initComponents();
         jButton3.setText(s1);
         jButton4.setText(s2);
         jButton5.setText(s3);
-        p=mafenetre.res(jLabel4, jLabel5, jLabel6, jLabel8, id);
-           
+        p = mafenetre.res(jLabel4, jLabel5, jLabel6, jLabel8, id);
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,13 +190,12 @@ public class ReserverG extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton de retour
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // TODO add your handling code here:
             new choixFilm(u).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
@@ -197,103 +203,86 @@ public class ReserverG extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    //les 3 bouton précedent comme pour la JFrame Reserver permette de selectionner la séance désirée
+    //Cependant pour les visiteurs il y à la possibilité de selectionner le nombre de places désirées; le prix est calculé en conséquence
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String s=null;
-        
-        if((Integer.parseInt(jLabel4.getText()))!=0 && ((Integer.parseInt(jLabel4.getText()))-(jComboBox1.getSelectedIndex()+1))>=0)
-        {
-            s=jButton3.getText();
+        String s = null;
+
+        if ((Integer.parseInt(jLabel4.getText())) != 0 && ((Integer.parseInt(jLabel4.getText())) - (jComboBox1.getSelectedIndex() + 1)) >= 0) {
+            s = jButton3.getText();
             try {
-                mafenetre.updateplaces(3,i,jComboBox1.getSelectedIndex());
-                p=p*(jComboBox1.getSelectedIndex()+1);
-                new Recapitulatif(i,s,p,u).setVisible(true);
+                mafenetre.updateplaces(3, i, jComboBox1.getSelectedIndex());
+                p = p * (jComboBox1.getSelectedIndex() + 1);
+                new Recapitulatif(i, s, p, u).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ReserverG.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
+        } else if ((Integer.parseInt(jLabel4.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton3.getText() + "");
+        } //verification du nombre de place restante par rapport à la demande du client 
+        else if (((Integer.parseInt(jLabel4.getText())) - (jComboBox1.getSelectedIndex() + 1)) < 0) {
+            JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de " + jButton3.getText() + "");
         }
-        
-         else if((Integer.parseInt(jLabel4.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton3.getText()+"");
-        }
-        
-        else if(((Integer.parseInt(jLabel4.getText()))-(jComboBox1.getSelectedIndex()+1))<0)
-        {
-             JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de "+jButton3.getText()+"");
-        } 
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-         String s=null;
-        
-        if((Integer.parseInt(jLabel5.getText()))!=0 && ((Integer.parseInt(jLabel5.getText()))-(jComboBox1.getSelectedIndex()+1))>=0)
-        {
-            s=jButton4.getText();
+
+        String s = null;
+
+        if ((Integer.parseInt(jLabel5.getText())) != 0 && ((Integer.parseInt(jLabel5.getText())) - (jComboBox1.getSelectedIndex() + 1)) >= 0) {
+            s = jButton4.getText();
             try {
-                mafenetre.updateplaces(3,i,jComboBox1.getSelectedIndex());
-                p=p*jComboBox1.getSelectedIndex()+10;
-                new Recapitulatif(i,s,p,u).setVisible(true);
+                mafenetre.updateplaces(3, i, jComboBox1.getSelectedIndex());
+                p = p * jComboBox1.getSelectedIndex() + 10;
+                new Recapitulatif(i, s, p, u).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ReserverG.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
+        } else if ((Integer.parseInt(jLabel5.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton4.getText() + "");
+        } //verification du nombre de place restante par rapport à la demande du client 
+        else if (((Integer.parseInt(jLabel5.getText())) - (jComboBox1.getSelectedIndex() + 1)) < 0) {
+            JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de " + jButton4.getText() + "");
         }
-        
-        else if((Integer.parseInt(jLabel5.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton4.getText()+"");
-        }
-        
-        else if(((Integer.parseInt(jLabel5.getText()))-(jComboBox1.getSelectedIndex()+1))<0)
-        {
-             JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de "+jButton4.getText()+"");
-        } 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-         String s=null;
-        
-        if((Integer.parseInt(jLabel6.getText()))!=0 && ((Integer.parseInt(jLabel6.getText()))-(jComboBox1.getSelectedIndex()+1))>=0)
-        {
-            s=jButton5.getText();
+
+        String s = null;
+
+        if ((Integer.parseInt(jLabel6.getText())) != 0 && ((Integer.parseInt(jLabel6.getText())) - (jComboBox1.getSelectedIndex() + 1)) >= 0) {
+            s = jButton5.getText();
             try {
-                mafenetre.updateplaces(3,i,jComboBox1.getSelectedIndex());
-                p=p*jComboBox1.getSelectedIndex()+10;
-                new Recapitulatif(i,s,p,u).setVisible(true);
+                mafenetre.updateplaces(3, i, jComboBox1.getSelectedIndex());
+                p = p * jComboBox1.getSelectedIndex() + 10;
+                new Recapitulatif(i, s, p, u).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(Reserver.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ReserverG.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
+        } else if ((Integer.parseInt(jLabel6.getText())) == 0) {
+            JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de " + jButton5.getText() + "");
+        } //verification du nombre de place restante par rapport à la demande du client 
+        else if (((Integer.parseInt(jLabel6.getText())) - (jComboBox1.getSelectedIndex() + 1)) < 0) {
+            JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de " + jButton5.getText() + "");
         }
-        
-        else if((Integer.parseInt(jLabel6.getText()))==0)
-        {
-             JOptionPane.showMessageDialog(this, "La salle est complete pour la seance de "+jButton5.getText()+"");
-        }
-        
-        else if(((Integer.parseInt(jLabel6.getText()))-(jComboBox1.getSelectedIndex()+1))<0)
-        {
-             JOptionPane.showMessageDialog(this, "Il ne reste plus assez de place pour la seance de "+jButton5.getText()+"");
-        } 
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

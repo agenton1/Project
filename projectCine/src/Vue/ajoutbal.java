@@ -15,22 +15,31 @@ import javax.swing.JOptionPane;
  * @author arthur
  */
 public class ajoutbal extends javax.swing.JFrame {
-    
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
-    String u,s;
+    String u, s;
     int i;
     double prix;
+
     /**
      * Creates new form ajoutbal
+     *
+     * @param username
+     * @param p
+     * @param seance
+     * @param id
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public ajoutbal(String username, double p, String seance, int id)throws SQLException, ClassNotFoundException {
+    public ajoutbal(String username, double p, String seance, int id) throws SQLException, ClassNotFoundException {
         initComponents();
-        u=username;
-        prix=p;
-        s=seance;
-        i=id;
+        u = username;
+        prix = p;
+        s = seance;
+        i = id;
         jLabel1.setText(" €");
-        
+
     }
 
     /**
@@ -55,12 +64,6 @@ public class ajoutbal extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         jLabel3.setText("CardNo");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("CVC");
 
@@ -122,35 +125,26 @@ public class ajoutbal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
+    //bouton permettant de valider le payement d'ajout d'euros à la balance du membre
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         String CardNo = jTextField2.getText();
         int CVC = Integer.parseInt(jTextField3.getText());
 
-        
-        if(CardNo.equals("") && CVC == 0){
+        //verifictaion des données bancaires saisies
+        if (CardNo.equals("") && CVC == 0) {
 
             JOptionPane.showMessageDialog(this, "enter CardNo and CVC");
 
-        }
-
-        else if (!(CardNo.equals("")) && CVC == 0 ){
+        } else if (!(CardNo.equals("")) && CVC == 0) {
 
             JOptionPane.showMessageDialog(this, "enter CVC");
-        }
-
-        else if ((CardNo.equals("")) && !(CVC == 0 ) ){
+        } else if ((CardNo.equals("")) && !(CVC == 0)) {
 
             JOptionPane.showMessageDialog(this, "enter CardNo");
-        }
-
+        } //si c'est authentifié alors on ajoute le montant saisis à la balance
         else try {
-            if(mafenetre.vcard(u, CardNo, CVC)==true)
-            {
+            if (mafenetre.vcard(u, CardNo, CVC) == true) {
 
                 JOptionPane.showMessageDialog(this, "Payement successfull");
 
@@ -158,9 +152,8 @@ public class ajoutbal extends javax.swing.JFrame {
                 new Payement(u, prix, s, i).setVisible(true);
                 this.dispose();
 
-            }
-            else if(mafenetre.vcard(u, CardNo, CVC)==false)
-            {
+            } //sinn il faut saisir à nouveau les données bancaires 
+            else if (mafenetre.vcard(u, CardNo, CVC) == false) {
 
                 JOptionPane.showMessageDialog(this, "wrong CardNo or CVC");
             }
@@ -171,7 +164,6 @@ public class ajoutbal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

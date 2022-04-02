@@ -15,30 +15,32 @@ import javax.swing.*;
  *
  * @author arthur
  */
-public class choixFilm extends javax.swing.JFrame  {
-    
-    static int a,b,c,d;
+public class choixFilm extends javax.swing.JFrame {
+
+    //creation d'un objet privé de Fentre
+    private Fenetre mafenetre = new Fenetre(false);
+    static int a, b, c, d;
     String u;
-   
+
     /**
      * Creates new form filmaffiche
+     *
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    private Fenetre mafenetre = new Fenetre(false);
-   
-    
-    public choixFilm(String username)throws SQLException, ClassNotFoundException {
-       
-        u=username;
+    public choixFilm(String username) throws SQLException, ClassNotFoundException {
+
+        u = username;
         initComponents();
-       
-        a=mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1,1);
-        b=mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5,2);
-        c=mafenetre.Film(jLabel10, jLabel12, jLabel11, jLabel9,3);
-        d=mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15,4);
-     
-          
+        //appel de la methode Film permettant d'afficher certaines données de chaque films afin d'avoir un apercu de chaque film à l'affiche 
+        a = mafenetre.Film(jLabel4, jLabel3, jLabel2, jLabel1, 1);
+        b = mafenetre.Film(jLabel8, jLabel7, jLabel6, jLabel5, 2);
+        c = mafenetre.Film(jLabel10, jLabel12, jLabel11, jLabel9, 3);
+        d = mafenetre.Film(jLabel13, jLabel16, jLabel14, jLabel15, 4);
+
     }
-      
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -254,81 +256,62 @@ public class choixFilm extends javax.swing.JFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //les 4 boutons suivants permettent d'acceder à la page d'information du film selectionné
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
         try {
-            // TODO add your handling code here:
-            
-            new Info(c,u).setVisible(true);
-           
-            //System.out.println(getId());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            new Info(c, u).setVisible(true);
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+
         try {
-            // TODO add your handling code here:
-            
-            new Info(b,u).setVisible(true);
-           
-            //System.out.println(getId());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            new Info(b, u).setVisible(true);
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+
         try {
-            // TODO add your handling code here:
-            
-            new Info(d,u).setVisible(true);
-           
-            //System.out.println(getId());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            new Info(d, u).setVisible(true);
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        
         try {
-            
-            // TODO add your handling code here:
-          
-            new Info(a,u).setVisible(true);
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+
+            new Info(a, u).setVisible(true);
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(choixFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    //bouton de retour à la page d'accueil
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         new accueil().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Canvas canvas1;
@@ -355,7 +338,4 @@ public class choixFilm extends javax.swing.JFrame  {
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
-   
-
-   
 }

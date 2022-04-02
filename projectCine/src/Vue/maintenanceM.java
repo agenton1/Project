@@ -14,15 +14,17 @@ import javax.swing.JOptionPane;
  * @author arthur
  */
 public class maintenanceM extends javax.swing.JFrame {
-    
+
+    //creation d'un objet privé de Fentre
     private Fenetre mafenetre = new Fenetre(false);
     String u;
+
     /**
      * Creates new form maintenanceM
      */
-    public maintenanceM(String username)  throws SQLException, ClassNotFoundException{
+    public maintenanceM(String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        u=username;
+        u = username;
     }
 
     /**
@@ -133,55 +135,47 @@ public class maintenanceM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Bouton permettant de valider la modifiction des identifiant d'un membre 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if(jTextField1.getText().equals("") && jPasswordField1.getText().equals("")){ 
-          
-          JOptionPane.showMessageDialog(this, "enter username and password");
-          
-       }
-       
-       else if (!(jTextField1.getText().equals("")) && jPasswordField1.getText().equals("") ){
-           
-           JOptionPane.showMessageDialog(this, "enter password");
-       }
-       
-       else if ((jTextField1.getText().equals("")) && !jPasswordField1.getText().equals("")) {
-           
-           JOptionPane.showMessageDialog(this, "enter username");
-       } 
-       else try {
-            // TODO add your handling code here:
-            if (mafenetre.veri(jTextField1.getText(), jPasswordField1.getText())==true)
-            {
+
+        //verification que l'ancien mot de passe est password saisis soit correct afin de procéder au changement d'identifiant
+        if (jTextField1.getText().equals("") && jPasswordField1.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "enter username and password");
+
+        } else if (!(jTextField1.getText().equals("")) && jPasswordField1.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "enter password");
+        } else if ((jTextField1.getText().equals("")) && !jPasswordField1.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "enter username");
+        } else try {
+            //si les anciens identifiants sont correct alors on les met à jours avec les nouveaux saisis
+            if (mafenetre.veri(jTextField1.getText(), jPasswordField1.getText()) == true) {
                 mafenetre.NMember(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
                 JOptionPane.showMessageDialog(this, "changement opéré");
-                new accueilEmploye(u).setVisible(true); 
+                new accueilEmploye(u).setVisible(true);
+            } else if (mafenetre.veri(jTextField1.getText(), jPasswordField1.getText()) == false) {
+                JOptionPane.showMessageDialog(this, "wrong");
             }
-            else if(mafenetre.veri(jTextField1.getText(), jPasswordField1.getText())==false)
-            {
-               JOptionPane.showMessageDialog(this, "wrong");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(maintenanceM.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(maintenanceM.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //les 2 méthode suivante permette d'afficher ou masquer le mot de passe entré par l'employé en passant la souris dessus ou non 
     private void jPasswordField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseEntered
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u0000');
     }//GEN-LAST:event_jPasswordField1MouseEntered
 
     private void jPasswordField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseExited
-        // TODO add your handling code here:
+
         jPasswordField1.setEchoChar('\u25cf');
     }//GEN-LAST:event_jPasswordField1MouseExited
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -15,25 +15,28 @@ import javax.swing.JOptionPane;
  */
 public class Offre extends javax.swing.JFrame {
 
-     private Fenetre mafenetre = new Fenetre(false);
-     String u;
+    //creation d'un objet privé de Fentre 
+    private Fenetre mafenetre = new Fenetre(false);
+    String u;
+
     /**
-     * Creates new form Offre
+     * Creates new form Offre Constructeur de la JFrame Offre
+     *
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public Offre(String username) throws SQLException, ClassNotFoundException{
+    public Offre(String username) throws SQLException, ClassNotFoundException {
         initComponents();
-        u=username;
-        
-        if(mafenetre.RecupOffre(u, jLabel2)==0)
-        {
+        u = username;
+
+        //affichichage de l'offre ou nom en fonction de s'il y en a une ou non
+        if (mafenetre.RecupOffre(u, jLabel2) == 0) {
             jLabel2.setText("pas d'offres actuellement");
-        }
-        
-        else 
-        {
+        } else {
             mafenetre.RecupOffre(u, jLabel2);
         }
-        
+
     }
 
     /**
@@ -122,34 +125,31 @@ public class Offre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //bouton permettant de valider l'offre saisit et de la mettre dans la bdd
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-             // TODO add your handling code here:
-             mafenetre.Offre(Integer.parseInt(jTextField1.getText()),u);
-             JOptionPane.showMessageDialog(this, "Offre appliquée");
-             new accueilEmploye(u).setVisible(true);
-             this.dispose();
-             
-         } catch (SQLException ex) {
-             Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+
+            mafenetre.Offre(Integer.parseInt(jTextField1.getText()), u);
+            JOptionPane.showMessageDialog(this, "Offre appliquée");
+            new accueilEmploye(u).setVisible(true);
+            this.dispose();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //bouton de retour vers accueil employé
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         try {
-             // TODO add your handling code here:
-             new accueilEmploye(u).setVisible(true);
-         } catch (SQLException ex) {
-             Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+
+            new accueilEmploye(u).setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Offre.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
