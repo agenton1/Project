@@ -22,9 +22,15 @@ public class Ticket extends javax.swing.JFrame {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Ticket(int id) throws SQLException, ClassNotFoundException {
+    public Ticket(int id,String username) throws SQLException, ClassNotFoundException {
         initComponents();
         //Fonction d'affichage du ticket
+        if(!username.equals("guest")){
+            jLabel3.setText("IdMembre");
+        }
+        else if (username.equals("guest")){
+            jLabel3.setText("IdGuest");
+        }
         mafenetre.affTicket(jLabel4, jLabel6, jLabel8, jLabel10, id);
         jLabel2.setText("" + id + "");
 

@@ -171,8 +171,8 @@ public class Payement extends javax.swing.JFrame {
             else if (u.equals("guest")) {
                 JOptionPane.showMessageDialog(this, "Payement successfull");
                 try {
-                    mafenetre.Ticket(id, String.valueOf(g), i, prix, s);
-                    new Ticket(id).setVisible(true);
+                    mafenetre.TicketG(id, g, i, prix, s);
+                    new Ticket(id,u).setVisible(true);
                     this.dispose();
 
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -197,7 +197,7 @@ public class Payement extends javax.swing.JFrame {
 
                     mafenetre.Ticket(id, u, i, prix, s);
                     mafenetre.updatePrice(prix, u);
-                    new Ticket(id).setVisible(true);
+                    new Ticket(id,u).setVisible(true);
                     this.dispose();
 
                 } //Si non afficher Wrong et recommencer à saisir les données de CB

@@ -117,10 +117,18 @@ public class Connexion {
 
     }
 
-    //fonction premettant de créer un nouveau ticket dans la bdd 
+    //fonction premettant de créer un nouveau ticket dans la bdd pour les membre
     public void Ticket(int id, String u, int idmo, double price, String seance) throws SQLException {
         //création d'une nouvelle ligne dans la table ticket
         String sql = "INSERT INTO Ticket (idTicket, idMember, idMovie, Price, seance) VALUES (" + id + ", (Select idMember from Member where Mail = '" + u + "')," + idmo + "," + price + ",'" + seance + "')";
+        //execution requète
+        stmt.executeUpdate(sql);
+    }
+    
+    //fonction premettant de créer un nouveau ticket dans la bdd pour les visiteurs
+    public void TicketG(int id, int idg, int idmo, double price, String seance) throws SQLException {
+        //création d'une nouvelle ligne dans la table ticket
+        String sql = "INSERT INTO Ticket (idTicket, idMember, idMovie, Price, seance) VALUES (" + id + ","+idg+" ," + idmo + "," + price + ",'" + seance + "')";
         //execution requète
         stmt.executeUpdate(sql);
     }

@@ -88,6 +88,10 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener {
     public void Ticket(int id, String u, int idmo, double price, String seance) throws SQLException {
         maconnexion.Ticket(id, u, idmo, price, seance);
     }
+    
+    public void TicketG(int id, int idg, int idmo, double price, String seance) throws SQLException {
+        maconnexion.TicketG(id, idg, idmo, price, seance);
+    }
 
     public void affTicket(JLabel idme, JLabel idmo, JLabel price, JLabel seance, int i) throws SQLException {
         maconnexion.affTicket(idme, idmo, price, seance, i);
